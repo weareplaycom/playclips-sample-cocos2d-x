@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>H5GJ5E6WGY.com.juandebravo.cocos2dtest</string>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>H5GJ5E6WGY.com.juandebravo.cocos2dtest</string>
+	</array>
+</dict>
+</plist>

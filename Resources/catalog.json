@@ -1,0 +1,1154 @@
+{
+    "elrubius": {
+        "name": "ElRubius OMG",
+        "thumbnail": "elrubius/thumbnail.png",
+        "videos": {
+            "1476194696785": {
+                "location": "elrubius/{quality}/1476194696785.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194653829": {
+                "location": "elrubius/{quality}/1476194653829.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476198049275": {
+                "location": "elrubius/{quality}/1476198049275.mp4",
+                "weight": 1,
+                "tags": [
+                         "skill"
+                         ]
+            },
+            "1476198247987": {
+                "location": "elrubius/{quality}/1476198247987.mp4",
+                "weight": 1,
+                "tags": [
+                         "free_fall"
+                         ]
+            },
+            "1476210823045": {
+                "location": "elrubius/{quality}/1476210823045.mp4",
+                "weight": 5,
+                "tags": [
+                         "weapon_tutorial"
+                         ]
+            },
+            "1476195664840": {
+                "location": "elrubius/{quality}/1476195664840.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195629378": {
+                "location": "elrubius/{quality}/1476195629378.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195547157": {
+                "location": "elrubius/{quality}/1476195547157.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195509359": {
+                "location": "elrubius/{quality}/1476195509359.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195471023": {
+                "location": "elrubius/{quality}/1476195471023.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195397279": {
+                "location": "elrubius/{quality}/1476195397279.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476197279858": {
+                "location": "elrubius/{quality}/1476197279858.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_fuel"
+                         ]
+            },
+            "1476197113322": {
+                "location": "elrubius/{quality}/1476197113322.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476198327098": {
+                "location": "elrubius/{quality}/1476198327098.mp4",
+                "weight": 4,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476198389065": {
+                "location": "elrubius/{quality}/1476198389065.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476197149598": {
+                "location": "elrubius/{quality}/1476197149598.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_enemy"
+                         ]
+            },
+            "1476198782873": {
+                "location": "elrubius/{quality}/1476198782873.mp4",
+                "weight": 5,
+                "tags": [
+                         "death",
+                         "sure_death"
+                         ]
+            },
+            "1476198168452": {
+                "location": "elrubius/{quality}/1476198168452.mp4",
+                "weight": 1,
+                "tags": [
+                         "epic_item"
+                         ]
+            },
+            "1476194868395": {
+                "location": "elrubius/{quality}/1476194868395.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194955017": {
+                "location": "elrubius/{quality}/1476194955017.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194995947": {
+                "location": "elrubius/{quality}/1476194995947.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195068459": {
+                "location": "elrubius/{quality}/1476195068459.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195161491": {
+                "location": "elrubius/{quality}/1476195161491.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195995715": {
+                "location": "elrubius/{quality}/1476195995715.mp4",
+                "weight": 1,
+                "tags": [
+                         "shop_gift"
+                         ]
+            },
+            "1476196087476": {
+                "location": "elrubius/{quality}/1476196087476.mp4",
+                "weight": 1,
+                "tags": [
+                         "shop_gift"
+                         ]
+            },
+            "1476196181066": {
+                "location": "elrubius/{quality}/1476196181066.mp4",
+                "weight": 1,
+                "tags": [
+                         "level",
+                         "first_levels"
+                         ]
+            },
+            "1476196878407": {
+                "location": "elrubius/{quality}/1476196878407.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit",
+                         "big_hit_pool"
+                         ]
+            },
+            "1476196818529": {
+                "location": "elrubius/{quality}/1476196818529.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit",
+                         "big_hit_enemy"
+                         ]
+            },
+            "1476196703936": {
+                "location": "elrubius/{quality}/1476196703936.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit"
+                         ]
+            },
+            "1476196545034": {
+                "location": "elrubius/{quality}/1476196545034.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196460704": {
+                "location": "elrubius/{quality}/1476196460704.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196369184": {
+                "location": "elrubius/{quality}/1476196369184.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196329920": {
+                "location": "elrubius/{quality}/1476196329920.mp4",
+                "weight": 3,
+                "tags": [
+                         "level",
+                         "first_levels"
+                         ]
+            },
+            "1476196234933": {
+                "location": "elrubius/{quality}/1476196234933.mp4",
+                "weight": 1,
+                "tags": [
+                         "level"
+                         ]
+            },
+            "1476194790174": {
+                "location": "elrubius/{quality}/1476194790174.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194732521": {
+                "location": "elrubius/{quality}/1476194732521.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476198475512": {
+                "location": "elrubius/{quality}/1476198475512.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_enemy"
+                         ]
+            },
+            "1476197212695": {
+                "location": "elrubius/{quality}/1476197212695.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198541609": {
+                "location": "elrubius/{quality}/1476198541609.mp4",
+                "weight": 2,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198607305": {
+                "location": "elrubius/{quality}/1476198607305.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198647541": {
+                "location": "elrubius/{quality}/1476198647541.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_fuel"
+                         ]
+            },
+            "1476197321852": {
+                "location": "elrubius/{quality}/1476197321852.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476198688763": {
+                "location": "elrubius/{quality}/1476198688763.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476198740584": {
+                "location": "elrubius/{quality}/1476198740584.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476210992831": {
+                "location": "elrubius/{quality}/1476210992831.mp4",
+                "weight": 1,
+                "tags": [
+                         "welcome"
+                         ]
+            },
+            "1476198210019": {
+                "location": "elrubius/{quality}/1476198210019.mp4",
+                "weight": 1,
+                "tags": [
+                         "good_luck"
+                         ]
+            },
+            "1476357217298": {
+                "location": "elrubius/{quality}/1476357217298.mp4",
+                "weight": 1,
+                "tags": [
+                         "landing",
+                         "good_landing"
+                         ]
+            },
+            "1476197009424": {
+                "location": "elrubius/{quality}/1476197009424.mp4",
+                "weight": 3,
+                "tags": [
+                         "landing",
+                         "good_landing"
+                         ]
+            },
+            "1476198893592": {
+                "location": "elrubius/{quality}/1476198893592.mp4",
+                "weight": 1,
+                "tags": [
+                         "landing",
+                         "bad_landing"
+                         ]
+            },
+            "1476198821037": {
+                "location": "elrubius/{quality}/1476198821037.mp4",
+                "weight": 2,
+                "tags": [
+                         "landing",
+                         "bad_landing"
+                         ]
+            }
+        }
+    },
+    "rovi23": {
+        "name": "Rovi23",
+        "thumbnail": "rovi23/thumbnail.png",
+        "videos": {
+            "1476194696785": {
+                "location": "rovi23/{quality}/1476194696785.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194653829": {
+                "location": "rovi23/{quality}/1476194653829.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476198049275": {
+                "location": "rovi23/{quality}/1476198049275.mp4",
+                "weight": 1,
+                "tags": [
+                         "skill"
+                         ]
+            },
+            "1476198247987": {
+                "location": "rovi23/{quality}/1476198247987.mp4",
+                "weight": 1,
+                "tags": [
+                         "free_fall"
+                         ]
+            },
+            "1476210823045": {
+                "location": "rovi23/{quality}/1476210823045.mp4",
+                "weight": 5,
+                "tags": [
+                         "weapon_tutorial"
+                         ]
+            },
+            "1476195664840": {
+                "location": "rovi23/{quality}/1476195664840.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195629378": {
+                "location": "rovi23/{quality}/1476195629378.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195547157": {
+                "location": "rovi23/{quality}/1476195547157.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195509359": {
+                "location": "rovi23/{quality}/1476195509359.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195471023": {
+                "location": "rovi23/{quality}/1476195471023.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195397279": {
+                "location": "rovi23/{quality}/1476195397279.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476197279858": {
+                "location": "rovi23/{quality}/1476197279858.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_fuel"
+                         ]
+            },
+            "1476197113322": {
+                "location": "rovi23/{quality}/1476197113322.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476198327098": {
+                "location": "rovi23/{quality}/1476198327098.mp4",
+                "weight": 4,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476198389065": {
+                "location": "rovi23/{quality}/1476198389065.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476197149598": {
+                "location": "rovi23/{quality}/1476197149598.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_enemy"
+                         ]
+            },
+            "1476198782873": {
+                "location": "rovi23/{quality}/1476198782873.mp4",
+                "weight": 5,
+                "tags": [
+                         "death",
+                         "sure_death"
+                         ]
+            },
+            "1476198168452": {
+                "location": "rovi23/{quality}/1476198168452.mp4",
+                "weight": 1,
+                "tags": [
+                         "epic_item"
+                         ]
+            },
+            "1476194868395": {
+                "location": "rovi23/{quality}/1476194868395.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194955017": {
+                "location": "rovi23/{quality}/1476194955017.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194995947": {
+                "location": "rovi23/{quality}/1476194995947.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195068459": {
+                "location": "rovi23/{quality}/1476195068459.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195161491": {
+                "location": "rovi23/{quality}/1476195161491.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195995715": {
+                "location": "rovi23/{quality}/1476195995715.mp4",
+                "weight": 1,
+                "tags": [
+                         "shop_gift"
+                         ]
+            },
+            "1476196087476": {
+                "location": "rovi23/{quality}/1476196087476.mp4",
+                "weight": 1,
+                "tags": [
+                         "shop_gift"
+                         ]
+            },
+            "1476196181066": {
+                "location": "rovi23/{quality}/1476196181066.mp4",
+                "weight": 1,
+                "tags": [
+                         "level",
+                         "first_levels"
+                         ]
+            },
+            "1476196878407": {
+                "location": "rovi23/{quality}/1476196878407.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit",
+                         "big_hit_pool"
+                         ]
+            },
+            "1476196818529": {
+                "location": "rovi23/{quality}/1476196818529.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit",
+                         "big_hit_enemy"
+                         ]
+            },
+            "1476196703936": {
+                "location": "rovi23/{quality}/1476196703936.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit"
+                         ]
+            },
+            "1476196545034": {
+                "location": "rovi23/{quality}/1476196545034.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196460704": {
+                "location": "rovi23/{quality}/1476196460704.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196369184": {
+                "location": "rovi23/{quality}/1476196369184.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196329920": {
+                "location": "rovi23/{quality}/1476196329920.mp4",
+                "weight": 3,
+                "tags": [
+                         "level",
+                         "first_levels"
+                         ]
+            },
+            "1476196234933": {
+                "location": "rovi23/{quality}/1476196234933.mp4",
+                "weight": 1,
+                "tags": [
+                         "level"
+                         ]
+            },
+            "1476194790174": {
+                "location": "rovi23/{quality}/1476194790174.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194732521": {
+                "location": "rovi23/{quality}/1476194732521.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476198475512": {
+                "location": "rovi23/{quality}/1476198475512.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_enemy"
+                         ]
+            },
+            "1476197212695": {
+                "location": "rovi23/{quality}/1476197212695.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198541609": {
+                "location": "rovi23/{quality}/1476198541609.mp4",
+                "weight": 2,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198607305": {
+                "location": "rovi23/{quality}/1476198607305.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198647541": {
+                "location": "rovi23/{quality}/1476198647541.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_fuel"
+                         ]
+            },
+            "1476197321852": {
+                "location": "rovi23/{quality}/1476197321852.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476198688763": {
+                "location": "rovi23/{quality}/1476198688763.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476198740584": {
+                "location": "rovi23/{quality}/1476198740584.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476210992831": {
+                "location": "rovi23/{quality}/1476210992831.mp4",
+                "weight": 1,
+                "tags": [
+                         "welcome"
+                         ]
+            },
+            "1476198210019": {
+                "location": "rovi23/{quality}/1476198210019.mp4",
+                "weight": 1,
+                "tags": [
+                         "good_luck"
+                         ]
+            },
+            "1476357217298": {
+                "location": "rovi23/{quality}/1476357217298.mp4",
+                "weight": 1,
+                "tags": [
+                         "landing",
+                         "good_landing"
+                         ]
+            },
+            "1476197009424": {
+                "location": "rovi23/{quality}/1476197009424.mp4",
+                "weight": 3,
+                "tags": [
+                         "landing",
+                         "good_landing"
+                         ]
+            },
+            "1476198893592": {
+                "location": "rovi23/{quality}/1476198893592.mp4",
+                "weight": 1,
+                "tags": [
+                         "landing",
+                         "bad_landing"
+                         ]
+            },
+            "1476198821037": {
+                "location": "rovi23/{quality}/1476198821037.mp4",
+                "weight": 2,
+                "tags": [
+                         "landing",
+                         "bad_landing"
+                         ]
+            }
+        }
+    },
+    "danirep": {
+        "name": "TheDaniRep",
+        "thumbnail": "danirep/thumbnail.png",
+        "videos": {
+            "1476194696785": {
+                "location": "danirep/{quality}/1476194696785.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194653829": {
+                "location": "danirep/{quality}/1476194653829.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476198049275": {
+                "location": "danirep/{quality}/1476198049275.mp4",
+                "weight": 1,
+                "tags": [
+                         "skill"
+                         ]
+            },
+            "1476198247987": {
+                "location": "danirep/{quality}/1476198247987.mp4",
+                "weight": 1,
+                "tags": [
+                         "free_fall"
+                         ]
+            },
+            "1476210823045": {
+                "location": "danirep/{quality}/1476210823045.mp4",
+                "weight": 5,
+                "tags": [
+                         "weapon_tutorial"
+                         ]
+            },
+            "1476195664840": {
+                "location": "danirep/{quality}/1476195664840.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195629378": {
+                "location": "danirep/{quality}/1476195629378.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195547157": {
+                "location": "danirep/{quality}/1476195547157.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195509359": {
+                "location": "danirep/{quality}/1476195509359.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195471023": {
+                "location": "danirep/{quality}/1476195471023.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476195397279": {
+                "location": "danirep/{quality}/1476195397279.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_boss"
+                         ]
+            },
+            "1476197279858": {
+                "location": "danirep/{quality}/1476197279858.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_fuel"
+                         ]
+            },
+            "1476197113322": {
+                "location": "danirep/{quality}/1476197113322.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476198327098": {
+                "location": "danirep/{quality}/1476198327098.mp4",
+                "weight": 4,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476198389065": {
+                "location": "danirep/{quality}/1476198389065.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dump"
+                         ]
+            },
+            "1476197149598": {
+                "location": "danirep/{quality}/1476197149598.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_enemy"
+                         ]
+            },
+            "1476198782873": {
+                "location": "danirep/{quality}/1476198782873.mp4",
+                "weight": 5,
+                "tags": [
+                         "death",
+                         "sure_death"
+                         ]
+            },
+            "1476198168452": {
+                "location": "danirep/{quality}/1476198168452.mp4",
+                "weight": 1,
+                "tags": [
+                         "epic_item"
+                         ]
+            },
+            "1476194868395": {
+                "location": "danirep/{quality}/1476194868395.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194955017": {
+                "location": "danirep/{quality}/1476194955017.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194995947": {
+                "location": "danirep/{quality}/1476194995947.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195068459": {
+                "location": "danirep/{quality}/1476195068459.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195161491": {
+                "location": "danirep/{quality}/1476195161491.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476195995715": {
+                "location": "danirep/{quality}/1476195995715.mp4",
+                "weight": 1,
+                "tags": [
+                         "shop_gift"
+                         ]
+            },
+            "1476196087476": {
+                "location": "danirep/{quality}/1476196087476.mp4",
+                "weight": 1,
+                "tags": [
+                         "shop_gift"
+                         ]
+            },
+            "1476196181066": {
+                "location": "danirep/{quality}/1476196181066.mp4",
+                "weight": 1,
+                "tags": [
+                         "level",
+                         "first_levels"
+                         ]
+            },
+            "1476196878407": {
+                "location": "danirep/{quality}/1476196878407.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit",
+                         "big_hit_pool"
+                         ]
+            },
+            "1476196818529": {
+                "location": "danirep/{quality}/1476196818529.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit",
+                         "big_hit_enemy"
+                         ]
+            },
+            "1476196703936": {
+                "location": "danirep/{quality}/1476196703936.mp4",
+                "weight": 1,
+                "tags": [
+                         "big_hit"
+                         ]
+            },
+            "1476196545034": {
+                "location": "danirep/{quality}/1476196545034.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196460704": {
+                "location": "danirep/{quality}/1476196460704.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196369184": {
+                "location": "danirep/{quality}/1476196369184.mp4",
+                "weight": 1,
+                "tags": [
+                         "setting_change"
+                         ]
+            },
+            "1476196329920": {
+                "location": "danirep/{quality}/1476196329920.mp4",
+                "weight": 3,
+                "tags": [
+                         "level",
+                         "first_levels"
+                         ]
+            },
+            "1476196234933": {
+                "location": "danirep/{quality}/1476196234933.mp4",
+                "weight": 1,
+                "tags": [
+                         "level"
+                         ]
+            },
+            "1476194790174": {
+                "location": "danirep/{quality}/1476194790174.mp4",
+                "weight": 1,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476194732521": {
+                "location": "danirep/{quality}/1476194732521.mp4",
+                "weight": 2,
+                "tags": [
+                         "joke"
+                         ]
+            },
+            "1476198475512": {
+                "location": "danirep/{quality}/1476198475512.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_enemy"
+                         ]
+            },
+            "1476197212695": {
+                "location": "danirep/{quality}/1476197212695.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198541609": {
+                "location": "danirep/{quality}/1476198541609.mp4",
+                "weight": 2,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198607305": {
+                "location": "danirep/{quality}/1476198607305.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_env"
+                         ]
+            },
+            "1476198647541": {
+                "location": "danirep/{quality}/1476198647541.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_fuel"
+                         ]
+            },
+            "1476197321852": {
+                "location": "danirep/{quality}/1476197321852.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476198688763": {
+                "location": "danirep/{quality}/1476198688763.mp4",
+                "weight": 3,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476198740584": {
+                "location": "danirep/{quality}/1476198740584.mp4",
+                "weight": 1,
+                "tags": [
+                         "death",
+                         "death_by_dynamic"
+                         ]
+            },
+            "1476210992831": {
+                "location": "danirep/{quality}/1476210992831.mp4",
+                "weight": 1,
+                "tags": [
+                         "welcome"
+                         ]
+            },
+            "1476198210019": {
+                "location": "danirep/{quality}/1476198210019.mp4",
+                "weight": 1,
+                "tags": [
+                         "good_luck"
+                         ]
+            },
+            "1476357217298": {
+                "location": "danirep/{quality}/1476357217298.mp4",
+                "weight": 1,
+                "tags": [
+                         "landing",
+                         "good_landing"
+                         ]
+            },
+            "1476197009424": {
+                "location": "danirep/{quality}/1476197009424.mp4",
+                "weight": 3,
+                "tags": [
+                         "landing",
+                         "good_landing"
+                         ]
+            },
+            "1476198893592": {
+                "location": "danirep/{quality}/1476198893592.mp4",
+                "weight": 1,
+                "tags": [
+                         "landing",
+                         "bad_landing"
+                         ]
+            },
+            "1476198821037": {
+                "location": "danirep/{quality}/1476198821037.mp4",
+                "weight": 2,
+                "tags": [
+                         "landing",
+                         "bad_landing"
+                         ]
+            }
+        }
+    }
+}
