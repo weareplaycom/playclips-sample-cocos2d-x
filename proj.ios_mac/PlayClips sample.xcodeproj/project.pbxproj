@@ -12,6 +12,9 @@
 		0D29213D1FBEFE9C0034B6DC /* welcome.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0D29213B1FBEFE9C0034B6DC /* welcome.mp4 */; };
 		0D5B45901FC1CF7700B28937 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5B458F1FC1CF7700B28937 /* play.png */; };
 		0D5B45911FC1CF7700B28937 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D5B458F1FC1CF7700B28937 /* play.png */; };
+		0D6B61711FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */; };
+		0D6B61721FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */; };
+		0D6B61741FC5C7D10053A7C7 /* PlayClipsSampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */; };
 		0D7A5D531FC319A600F4D73F /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D521FC319A600F4D73F /* catalog.json */; };
 		0D7A5D541FC31AC500F4D73F /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D521FC319A600F4D73F /* catalog.json */; };
 		0D7A5D561FC341C500F4D73F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D551FC341C500F4D73F /* Media.xcassets */; };
@@ -33,7 +36,6 @@
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
 		46880B8A19C43A87006E1F66 /* PlayClipsSampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */; };
-		46880B8B19C43A87006E1F66 /* PlayClipsSampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */; };
 		503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 503AE0F617EB97AB00D1A890 /* Icon.icns */; };
 		503AE10017EB989F00D1A890 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FB17EB989F00D1A890 /* AppController.mm */; };
 		503AE10117EB989F00D1A890 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 503AE0FC17EB989F00D1A890 /* main.m */; };
@@ -109,6 +111,8 @@
 		0D2921391FBEF67A0034B6DC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		0D29213B1FBEFE9C0034B6DC /* welcome.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = welcome.mp4; sourceTree = "<group>"; };
 		0D5B458F1FC1CF7700B28937 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayClipsModels.cpp; sourceTree = "<group>"; };
+		0D6B61701FC5916D0053A7C7 /* PlayClipsModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayClipsModels.h; sourceTree = "<group>"; };
 		0D7A5D521FC319A600F4D73F /* catalog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
 		0D7A5D551FC341C500F4D73F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		0D9CE9491FBC346E0047E63D /* playclips_400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playclips_400.png; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */,
 				46880B8719C43A87006E1F66 /* PlayClipsSampleScene.h */,
+				0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */,
+				0D6B61701FC5916D0053A7C7 /* PlayClipsModels.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -521,6 +527,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				0D6B61711FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* PlayClipsSampleScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
@@ -532,9 +539,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D6B61741FC5C7D10053A7C7 /* PlayClipsSampleScene.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				0D6B61721FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
-				46880B8B19C43A87006E1F66 /* PlayClipsSampleScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +668,6 @@
 					"-lsqlite3",
 					"-lz",
 					"-lxml2",
-					"-v",
 				);
 				PRODUCT_NAME = "PlayClips sample-desktop";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -699,7 +706,6 @@
 					"-lsqlite3",
 					"-lz",
 					"-lxml2",
-					"-v",
 				);
 				PRODUCT_NAME = "PlayClips sample-desktop";
 				PROVISIONING_PROFILE_SPECIFIER = "";

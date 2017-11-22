@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/PlayClipsSampleScene.cpp"
-            timestampString = "532879703.54863"
+            timestampString = "533056188.718469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "PlayClipsSample::loadCatalog(Ref* pSender)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/PlayClipsSampleScene.cpp"
+            timestampString = "533056188.718469"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "PlayClipsSample::onInfluencerSelected(Ref* pSender)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

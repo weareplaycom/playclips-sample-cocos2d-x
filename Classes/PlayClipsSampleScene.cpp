@@ -8,6 +8,7 @@
 #include "network/HttpClient.h"
 #include "ui/UIVideoPlayer.h"
 #include "PlayClipsSampleScene.h"
+#include "PlayClipsModels.h"
 
 using namespace cocos2d;
 using namespace rapidjson;
@@ -61,21 +62,8 @@ bool PlayClipsSample::init()
         closeItem->setPosition(Vec2(x,y));
     }
     
-    auto playVideo = MenuItemImage::create("play.png",
-                                           "play.png",
-                                           CC_CALLBACK_1(PlayClipsSample::playVideo, this, "elrubius/{quality}/1476196087476.mp4"));
-    
-    if (playVideo == nullptr || playVideo->getContentSize().width <= 0 || playVideo->getContentSize().height <= 0) {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    } else {
-        playVideo->setAnchorPoint(Vec2(1, 0));
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width * 1.2;
-        float y = origin.y;
-        playVideo->setPosition(Vec2(x,y));
-    }
-    
     // create bottom menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, playVideo, NULL);
+    auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
     
@@ -189,20 +177,49 @@ void PlayClipsSample::onHttpRequestCatalog(network::HttpClient *sender, network:
 void PlayClipsSample::loadJsonCatalog(const char* data) {
     jsonCatalog.Parse<kParseDefaultFlags>(data);
     
+    typedef GenericDocument<UTF8<>, MemoryPoolAllocator<>, CrtAllocator>::ValueType InfluencerData;
+    
     Vector<MenuItem*> influencerNames;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    int i = 0;
     
     for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog.MemberBegin(); itr != jsonCatalog.MemberEnd(); ++itr) {
         cocos2d::log("Loaded influencer %s with name %s",
                      itr->name.GetString(),
                      jsonCatalog[itr->name.GetString()]["name"].GetString());
         
-        auto item = MenuItemFont::create(jsonCatalog[itr->name.GetString()]["name"].GetString(),
+        Influencer* inf = new Influencer(itr->name.GetString(),
+                                         jsonCatalog[itr->name.GetString()]["name"].GetString(),
+                                         jsonCatalog[itr->name.GetString()]["thumbnail"].GetString());
+        
+        const InfluencerData& influencerData = jsonCatalog[inf->getId().c_str()];
+        
+        for (rapidjson::Value::ConstMemberIterator itr = influencerData["videos"].MemberBegin();
+             itr != influencerData["videos"].MemberEnd();
+             ++itr) {
+            
+            Video* video = new Video(itr->name.GetString(),
+                                     itr->value["location"].GetString(),
+                                     itr->value["weight"].GetInt());
+            auto tags = itr->value["tags"].GetArray();
+            for(int i=0; i < tags.Size(); i++) {
+                cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
+                             tags[i].GetString(),
+                             video->getId().c_str(),
+                             inf->getId().c_str());
+                video->addTag(tags[i].GetString());
+            }
+            inf->addVideo(video);
+        }
+
+        influencers.push_front(inf);
+    }
+    
+    int i = 0;
+    for (auto& inf: influencers) {
+        auto item = MenuItemFont::create(inf->getId(),
                                          CC_CALLBACK_1(PlayClipsSample::onInfluencerSelected, this));
         
-        item->setName(itr->name.GetString());
+        item->setName(inf->getId());
         item->setFontNameObj("Arial");
         item->setFontSizeObj(14);
         item->setAnchorPoint(Vec2(0, 0));
@@ -219,36 +236,44 @@ void PlayClipsSample::loadJsonCatalog(const char* data) {
     this->addChild(menu, 1);
 }
 
+Influencer* getInfluencerById(std::list<Influencer*> influencers, std::string id) {
+    for (auto& inf: influencers) {
+        if (inf->getId() == id) {
+            return inf;
+        }
+    }
+    return nullptr;
+}
+
 void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     MenuItemFont* item = (MenuItemFont *)pSender;
     Vector<MenuItem*> tagsMenu;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
+    const Influencer* influencer = getInfluencerById(influencers, item->getName());
+    cocos2d::log("%s", influencer->getId().c_str());
+    
     std::set<std::string> tags;
     
-    typedef GenericDocument<UTF8<>, MemoryPoolAllocator<>, CrtAllocator>::ValueType InfluencerData;
+    Video* v;
     
-    cocos2d::log("%s", item->getName().c_str());
-    const InfluencerData& influencerData = jsonCatalog[item->getName().c_str()];
-    
-    for (rapidjson::Value::ConstMemberIterator itr = influencerData["videos"].MemberBegin();
-         itr != influencerData["videos"].MemberEnd();
-         ++itr) {
-        std::string tag = influencerData["videos"][itr->name.GetString()]["tags"][0].GetString();
-        cocos2d::log("Adding tag %s to the list ", tag.c_str());
-        tags.insert(tag);
+    for (auto& video: influencer->getVideos()) {
+        v = video;
+        for (auto &tag: video->getTags()) {
+            tags.insert(tag);
+        }
     }
+    
     cocos2d::log("Tags set size is %lu", tags.size());
     int i =0;
     
-    for (auto itr=tags.begin(); itr!=tags.end(); ++itr) {
-        auto item = MenuItemFont::create(*itr,
+    for (const auto& tag: tags) {
+        auto item = MenuItemFont::create(tag,
                                          CC_CALLBACK_1(PlayClipsSample::playVideo,
                                                        this,
-                                                       influencerData["videos"]["1476196087476"]["location"].GetString()
-                                                       ));
+                                                       v->getLocation()));
         
-        item->setName(*itr);
+        item->setName(tag);
         item->setFontNameObj("Arial");
         item->setFontSizeObj(14);
         item->setAnchorPoint(Vec2(0, 1));
@@ -263,7 +288,7 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     
 }
 
-void PlayClipsSample::playVideo(Ref* pSender, const char* location) {
+void PlayClipsSample::playVideo(Ref* pSender, std::string& location) {
     std::string str = location;
     
     // TODO: user to be able to select the quality, either high, medium or low
