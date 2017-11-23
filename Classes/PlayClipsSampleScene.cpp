@@ -241,9 +241,10 @@ void PlayClipsSample::loadJsonCatalog(const char* data) {
     this->addChild(menu, 1);
 }
 
-Influencer* getInfluencerById(std::list<Influencer*> influencers, std::string id) {
-    for (auto& inf: influencers) {
-        if (inf->getId() == id) {
+template <typename C, typename P>
+Influencer* findFirst(const C& c, P pred) {
+    for (auto& inf: c) {
+        if (pred(inf)) {
             return inf;
         }
     }
@@ -255,7 +256,11 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     Vector<MenuItem*> tagsMenu;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    const Influencer* influencer = getInfluencerById(influencers, item->getName());
+    const Influencer* influencer = findFirst(influencers,
+                                             [&item](const Influencer* inf) {
+                                                 return inf->getId() == item->getName();
+                                             }
+                                             );
     cocos2d::log("%s", influencer->getId().c_str());
     
     std::set<std::string> tags;
