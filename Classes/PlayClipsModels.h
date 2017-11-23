@@ -42,7 +42,9 @@ public:
 
     std::list<Video*> getVideos() const { return videos; };
 
-    void addVideo(Video* video) { videos.push_back(video); }
+    void addVideo(Video* video) { videos.push_back(video); };
+
+    Video* getVideoByTag (std::string tag) const;
 
     std::list<Video*> getVideos() { return videos; }
 

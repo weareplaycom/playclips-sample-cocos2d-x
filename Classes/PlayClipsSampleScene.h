@@ -23,7 +23,7 @@ public:
     void onInfluencerSelected(cocos2d::Ref *pSender);
     
     void loadCatalog(cocos2d::Ref* pSender);
-    void playVideo(cocos2d::Ref* pSender, std::string& location);
+    void playVideo(cocos2d::Ref* pSender, const Influencer* inf, std::string tag);
     
     void onHttpRequestCatalog(HttpClient *sender, HttpResponse *response);
     void loadJsonCatalog(const char* json);

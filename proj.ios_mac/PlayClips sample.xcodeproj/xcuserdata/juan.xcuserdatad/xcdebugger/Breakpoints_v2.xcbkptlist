@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/PlayClipsSampleScene.cpp"
-            timestampString = "533056188.718469"
+            timestampString = "533145661.964697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "360"
+            endingLineNumber = "360"
             landmarkName = "PlayClipsSample::loadCatalog(Ref* pSender)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/PlayClipsSampleScene.cpp"
-            timestampString = "533056188.718469"
+            timestampString = "533142757.081725"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "PlayClipsSample::onInfluencerSelected(Ref* pSender)"
             landmarkType = "7">
          </BreakpointContent>

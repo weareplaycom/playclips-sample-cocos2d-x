@@ -241,10 +241,34 @@ void PlayClipsSample::loadJsonCatalog(const char* data) {
     this->addChild(menu, 1);
 }
 
+template<typename R, typename C, typename P>
+void mapWithIndex(R& r, const C& c, P pred) {
+    int idx = 0;
+    for (auto& elem : c) {
+        r.pushBack(pred(elem, idx));
+        idx++;
+    }
+}
+
+template<typename C, typename P>
+void forEachWithIndex(const C& c, P pred) {
+    int idx = 0;
+    for (auto& elem : c) {
+        pred(elem, idx);
+    }
+}
+
+template<typename C, typename P>
+void forEach(const C& c, P pred) {
+    for (auto& elem : c) {
+        pred(elem);
+    }
+}
+
 template <typename C, typename P>
 Influencer* findFirst(const C& c, P pred) {
     for (auto& inf: c) {
-        if (pred(inf)) {
+        if (pred(*inf)) {
             return inf;
         }
     }
@@ -257,39 +281,36 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     const Influencer* influencer = findFirst(influencers,
-                                             [&item](const Influencer* inf) {
-                                                 return inf->getId() == item->getName();
+                                             [&item](const Influencer& inf) {
+                                                 return inf.getId() == item->getName();
                                              }
                                              );
     cocos2d::log("%s", influencer->getId().c_str());
     
     std::set<std::string> tags;
     
-    Video* v;
-    
-    for (auto& video: influencer->getVideos()) {
-        v = video;
-        for (auto &tag: video->getTags()) {
+    forEach(influencer->getVideos(), [&tags](Video* video) {
+        forEach(video->getTags(), [&tags](std::string tag){
             tags.insert(tag);
-        }
-    }
+        });
+    });
     
     cocos2d::log("Tags set size is %lu", tags.size());
-    int i =0;
     
-    for (const auto& tag: tags) {
+    mapWithIndex(tagsMenu, tags, [&origin, &influencer, this](std::string tag, int idx) {
         auto item = MenuItemFont::create(tag,
                                          CC_CALLBACK_1(PlayClipsSample::playVideo,
                                                        this,
-                                                       v->getLocation()));
-        
+                                                       influencer,
+                                                       tag));
         item->setName(tag);
         item->setFontNameObj("Arial");
         item->setFontSizeObj(14);
         item->setAnchorPoint(Vec2(0, 1));
-        item->setPosition(Vec2(origin.x+10, origin.y - 30*(i++)-10));
-        tagsMenu.pushBack(item);
-    }
+        item->setPosition(Vec2(origin.x+10, origin.y - 30*idx-10));
+        return item;
+    });
+
     auto menu = Menu::createWithArray(tagsMenu);
     menu->setAnchorPoint(Vec2(0, 1));
     menu->setPosition(Vec2(origin.x + 100, sprite->getPosition().y - 50 - sprite->getContentSize().height));
@@ -298,9 +319,10 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     
 }
 
-void PlayClipsSample::playVideo(Ref* pSender, std::string& location) {
-    std::string str = location;
-    
+void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string tag) {
+    Video* video = inf->getVideoByTag(tag);
+    std::string str = video->getLocation();
+
     // TODO: user to be able to select the quality, either high, medium or low
     str.replace(str.find("{quality}"), 9, "high");
     
@@ -326,7 +348,7 @@ void PlayClipsSample::playVideo(Ref* pSender, std::string& location) {
     this->addChild(videoPlayer, 10);
     videoPlayer->play();
 #else
-    std::string unsupportedPlatform = "Your platform does not support Video player";
+    std::string unsupportedPlatform = "I was about to reproduce "+video->getId()+", but your platform does not support Video player";
     cocos2d::log("%s", unsupportedPlatform.c_str());
     MessageBox(unsupportedPlatform.c_str(), "About");
 #endif
