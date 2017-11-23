@@ -65,6 +65,7 @@ bool PlayClipsSample::init()
     // create bottom menu, it's an autorelease object
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
+
     this->addChild(menu, 1);
     
     // Start menu item
@@ -164,10 +165,8 @@ void PlayClipsSample::onHttpRequestCatalog(network::HttpClient *sender, network:
     
     if (response && response->getResponseCode() == 200 && response->getResponseData()) {
         std::vector<char> *data = response->getResponseData();
-        std::string data_str(data->begin(), data->end());
-        
         // Extract information from JSON payload
-        loadJsonCatalog(data_str.c_str());
+        loadJsonCatalog(data->data());
     }
     else {
         cocos2d::log("Error while loading the catalog: %ld", response->getResponseCode());
@@ -182,31 +181,37 @@ void PlayClipsSample::loadJsonCatalog(const char* data) {
     Vector<MenuItem*> influencerNames;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
+    const char* inf_id;
+    
     for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog.MemberBegin(); itr != jsonCatalog.MemberEnd(); ++itr) {
         cocos2d::log("Loaded influencer %s with name %s",
                      itr->name.GetString(),
                      jsonCatalog[itr->name.GetString()]["name"].GetString());
         
-        Influencer* inf = new Influencer(itr->name.GetString(),
-                                         jsonCatalog[itr->name.GetString()]["name"].GetString(),
-                                         jsonCatalog[itr->name.GetString()]["thumbnail"].GetString());
+        inf_id = itr->name.GetString();
         
-        const InfluencerData& influencerData = jsonCatalog[inf->getId().c_str()];
+        Influencer* inf = new Influencer(inf_id,
+                                         jsonCatalog[inf_id]["name"].GetString(),
+                                         jsonCatalog[inf_id]["thumbnail"].GetString());
         
-        for (rapidjson::Value::ConstMemberIterator itr = influencerData["videos"].MemberBegin();
-             itr != influencerData["videos"].MemberEnd();
+        const InfluencerData& inf_data = jsonCatalog[inf_id];
+        
+        for (rapidjson::Value::ConstMemberIterator itr = inf_data["videos"].MemberBegin();
+             itr != inf_data["videos"].MemberEnd();
              ++itr) {
             
             Video* video = new Video(itr->name.GetString(),
                                      itr->value["location"].GetString(),
                                      itr->value["weight"].GetInt());
+
             auto tags = itr->value["tags"].GetArray();
-            for(int i=0; i < tags.Size(); i++) {
+            
+            for (auto& tag:tags) {
                 cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
-                             tags[i].GetString(),
+                             tag.GetString(),
                              video->getId().c_str(),
                              inf->getId().c_str());
-                video->addTag(tags[i].GetString());
+                video->addTag(tag.GetString());
             }
             inf->addVideo(video);
         }
