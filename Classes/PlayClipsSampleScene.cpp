@@ -10,7 +10,7 @@
 #include "PlayClipsSampleScene.h"
 #include "PlayClipsModels.h"
 
-using namespace cocos2d;
+USING_NS_CC;
 using namespace rapidjson;
 using namespace network;
 
@@ -265,8 +265,11 @@ void forEach(const C& c, P pred) {
     }
 }
 
+template <typename C>
+using Value_type = typename C::value_type;
+
 template <typename C, typename P>
-Influencer* findFirst(const C& c, P pred) {
+Value_type<C> findFirst(const C& c, P pred) {
     for (auto& inf: c) {
         if (pred(*inf)) {
             return inf;
@@ -320,6 +323,7 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
 }
 
 void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string tag) {
+
     Video* video = inf->getVideoByTag(tag);
     std::string str = video->getLocation();
 
