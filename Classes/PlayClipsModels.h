@@ -1,8 +1,7 @@
 #pragma once
 
-#include <iostream>
+#include <vector>
 #include <set>
-#include <list>
 
 class Video {
 
@@ -14,7 +13,7 @@ public:
 
     std::string getLocation() const { return location; };
 
-    std::set<std::string> getTags() { return tags; };
+    std::set<std::string> getTags() const { return tags; };
 
     void addTag(std::string tag) { tags.insert(tag); };
 
@@ -40,13 +39,11 @@ public:
 
     std::string getThumbnail() const { return thumbnail; };
 
-    std::list<Video*> getVideos() const { return videos; };
-
     void addVideo(Video* video) { videos.push_back(video); };
 
     Video* getVideoByTag (std::string tag) const;
 
-    std::list<Video*> getVideos() { return videos; }
+    std::vector<Video*> getVideos() const { return videos; }
 
     ~Influencer() {
         for (auto& video: videos) {
@@ -58,5 +55,5 @@ private:
     std::string influencer_id;
     std::string name;
     std::string thumbnail;
-    std::list<Video*> videos;
+    std::vector<Video*> videos;
 };

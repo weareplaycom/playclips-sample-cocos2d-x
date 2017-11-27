@@ -215,16 +215,15 @@ void PlayClipsSample::loadJsonCatalog(const char* data) {
             }
             inf->addVideo(video);
         }
-
-        influencers.push_front(inf);
+        influencers[inf->getId()] = inf;
     }
     
     int i = 0;
     for (auto& inf: influencers) {
-        auto item = MenuItemFont::create(inf->getId(),
+        auto item = MenuItemFont::create(inf.first,
                                          CC_CALLBACK_1(PlayClipsSample::onInfluencerSelected, this));
         
-        item->setName(inf->getId());
+        item->setName(inf.first);
         item->setFontNameObj("Arial");
         item->setFontSizeObj(14);
         item->setAnchorPoint(Vec2(0, 0));
@@ -282,12 +281,9 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     MenuItemFont* item = (MenuItemFont *)pSender;
     Vector<MenuItem*> tagsMenu;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    const Influencer* influencer = findFirst(influencers,
-                                             [&item](const Influencer& inf) {
-                                                 return inf.getId() == item->getName();
-                                             }
-                                             );
+
+    const Influencer* influencer = influencers[item->getName()];
+
     cocos2d::log("%s", influencer->getId().c_str());
     
     std::set<std::string> tags;
@@ -326,10 +322,11 @@ void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string
 
     Video* video = inf->getVideoByTag(tag);
     std::string str = video->getLocation();
+    std::string quality_placeholder = "{quality}";
 
     // TODO: user to be able to select the quality, either high, medium or low
-    str.replace(str.find("{quality}"), 9, "high");
-    
+    str = str.replace(str.find(quality_placeholder), quality_placeholder.length(), "high");
+
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     cocos2d::log("Play Video %s", str.c_str());
 

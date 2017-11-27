@@ -37,6 +37,6 @@ private:
     cocos2d::Menu* menuStart;
     cocos2d::Sprite* sprite;
     rapidjson::Document jsonCatalog;
-    std::list<Influencer*> influencers;
+    std::map<std::string, Influencer*> influencers;
     
 };
