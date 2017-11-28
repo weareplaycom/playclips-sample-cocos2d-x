@@ -9,12 +9,15 @@
 #include "ui/UIVideoPlayer.h"
 #include "PlayClipsSampleScene.h"
 #include "PlayClipsModels.h"
+#include "extensions/assets-manager/AssetsManagerEx.h"
+#include "extensions/assets-manager/CCEventListenerAssetsManagerEx.h"
 
 USING_NS_CC;
+USING_NS_CC_EXT;
 using namespace rapidjson;
 using namespace network;
 
-#define CONNECT_TO_CDN 1
+#define CONNECT_TO_CDN 0
 
 Scene* PlayClipsSample::createScene()
 {
@@ -120,6 +123,7 @@ bool PlayClipsSample::init()
     }
     
     this->scheduleUpdate();
+    this->downloadZipCatalog();
     // Relative priority: in case the node you are updating doesn’t actually need to be updated every frame,
     // to prevent wasting CPU power ( and battery life
     // this->scheduleUpdateWithPriority(100);
@@ -316,6 +320,74 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     
     this->addChild(menu, 10);
     
+}
+
+void PlayClipsSample::downloadZipCatalog()
+{
+    return;
+    std::string storagePath = FileUtils::getInstance()->getWritablePath() + "foo";
+
+    CCLOG("Storage path for this test : %s", storagePath.c_str());
+
+    AssetsManagerEx* _am = AssetsManagerEx::create("playclips.catalog",
+                                                   storagePath);
+    _am->retain();
+
+    if (!_am->getLocalManifest()->isLoaded()) {
+        CCLOG("Fail to update assets, step skipped.");
+    } else {
+        EventListenerAssetsManagerEx* _amListener = EventListenerAssetsManagerEx::create(_am, [&_am, this](EventAssetsManagerEx* event) {
+            static int failCount = 0;
+
+            switch (event->getEventCode()) {
+                case EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST:
+                    CCLOG("No local manifest file found, skip assets update.");
+                    break;
+                case EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION: {
+                    std::string assetId = event->getAssetId();
+                    float percent = event->getPercent();
+                    std::string str;
+                    if (assetId == AssetsManagerEx::VERSION_ID) {
+                        str = StringUtils::format("Version file: %.2f", percent) + "%";
+                    } else if (assetId == AssetsManagerEx::MANIFEST_ID) {
+                        str = StringUtils::format("Manifest file: %.2f", percent) + "%";
+                    } else {
+                        str = StringUtils::format("%.2f", percent) + "%";
+                        CCLOG("%.2f Percent", percent);
+                    }
+                    break;
+                }
+                case EventAssetsManagerEx::EventCode::ERROR_DOWNLOAD_MANIFEST:
+                case EventAssetsManagerEx::EventCode::ERROR_PARSE_MANIFEST:
+                    CCLOG("Fail to download manifest file, update skipped.");
+                    break;
+                case EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE:
+                case EventAssetsManagerEx::EventCode::UPDATE_FINISHED:
+                    CCLOG("Update finished. %s", event->getMessage().c_str());
+                    break;
+                case EventAssetsManagerEx::EventCode::UPDATE_FAILED:
+                    CCLOG("Update failed. %s", event->getMessage().c_str());
+                    failCount ++;
+                    if (failCount < 5) {
+                        _am->downloadFailedAssets();
+                    } else {
+                        CCLOG("Reach maximum fail count, exit update process");
+                        failCount = 0;
+                    }
+                    break;
+                case EventAssetsManagerEx::EventCode::ERROR_UPDATING:
+                    CCLOG("Asset %s : %s", event->getAssetId().c_str(), event->getMessage().c_str());
+                    break;
+                case EventAssetsManagerEx::EventCode::ERROR_DECOMPRESS:
+                    CCLOG("%s", event->getMessage().c_str());
+                    break;
+                default:
+                    break;
+            }
+        });
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_amListener, 1);
+        _am->update();
+    }
 }
 
 void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string tag) {

@@ -15,6 +15,8 @@
 		0D6B61711FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */; };
 		0D6B61721FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */; };
 		0D6B61741FC5C7D10053A7C7 /* PlayClipsSampleScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */; };
+		0D737B4C1FC736900041834B /* playclips.catalog in Resources */ = {isa = PBXBuildFile; fileRef = 0D737B4B1FC736900041834B /* playclips.catalog */; };
+		0D737B4E1FC737BB0041834B /* playclips.catalog in Resources */ = {isa = PBXBuildFile; fileRef = 0D737B4B1FC736900041834B /* playclips.catalog */; };
 		0D7A5D531FC319A600F4D73F /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D521FC319A600F4D73F /* catalog.json */; };
 		0D7A5D541FC31AC500F4D73F /* catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D521FC319A600F4D73F /* catalog.json */; };
 		0D7A5D561FC341C500F4D73F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D551FC341C500F4D73F /* Media.xcassets */; };
@@ -113,6 +115,8 @@
 		0D5B458F1FC1CF7700B28937 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayClipsModels.cpp; sourceTree = "<group>"; };
 		0D6B61701FC5916D0053A7C7 /* PlayClipsModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayClipsModels.h; sourceTree = "<group>"; };
+		0D737B4B1FC736900041834B /* playclips.catalog */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = playclips.catalog; sourceTree = "<group>"; };
+		0D737B501FC807E20041834B /* estd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = estd.h; sourceTree = "<group>"; };
 		0D7A5D521FC319A600F4D73F /* catalog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
 		0D7A5D551FC341C500F4D73F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		0D9CE9491FBC346E0047E63D /* playclips_400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playclips_400.png; sourceTree = "<group>"; };
@@ -237,6 +241,14 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		0D737B4F1FC807B50041834B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				0D737B501FC807E20041834B /* estd.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,6 +322,7 @@
 				0D9CE9491FBC346E0047E63D /* playclips_400.png */,
 				0D7A5D521FC319A600F4D73F /* catalog.json */,
 				0D7A5D551FC341C500F4D73F /* Media.xcassets */,
+				0D737B4B1FC736900041834B /* playclips.catalog */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -318,6 +331,7 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0D737B4F1FC807B50041834B /* utils */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */,
@@ -494,6 +508,7 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				0D9CE94A1FBC346E0047E63D /* playclips_400.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
+				0D737B4C1FC736900041834B /* playclips.catalog in Resources */,
 				0D29213C1FBEFE9C0034B6DC /* welcome.mp4 in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
@@ -507,6 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D737B4E1FC737BB0041834B /* playclips.catalog in Resources */,
 				0D7A5D541FC31AC500F4D73F /* catalog.json in Resources */,
 				0D29213D1FBEFE9C0034B6DC /* welcome.mp4 in Resources */,
 				0D5B45911FC1CF7700B28937 /* play.png in Resources */,

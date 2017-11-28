@@ -1,0 +1,14 @@
+{
+    "packageUrl" : "http://cdn-stg.svplayclips.com/",
+    "remoteManifestUrl" : "http://cdn-stg.svplayclips.com/playclips.manifest",
+    "remoteVersionUrl" : "http://cdn-stg.svplayclips.com/version.manifest",
+    "version" : "0.0.0",
+    "engineVersion" : "3.1.16",
+    "assets" : {
+        "catalog.zip" : {
+            "md5" : "0123456789",
+            "compressed": true
+        }
+    },
+    "searchPaths" : [ ]
+}

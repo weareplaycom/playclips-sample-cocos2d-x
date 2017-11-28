@@ -15,6 +15,8 @@ class PlayClipsSample : public cocos2d::Scene
 {
 public:
     virtual bool init() override;
+
+    void downloadZipCatalog();
     
     static cocos2d::Scene* createScene();
 
