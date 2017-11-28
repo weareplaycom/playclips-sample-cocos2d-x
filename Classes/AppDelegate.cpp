@@ -1,4 +1,7 @@
 #include "AppDelegate.h"
+
+#include "Adjust/Adjust2dx.h"
+#include "PlayClipsSampleConfig.h"
 #include "PlayClipsSampleScene.h"
 
 //#define USE_AUDIO_ENGINE 1
@@ -99,6 +102,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 //    }
 
     register_all_packages();
+
+    std::string appToken = PlayClipsSampleConfig::AdjustAppToken;
+    std::string environment = PlayClipsSampleConfig::AdjustEnvironment;
+
+    AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
+    adjustConfig.setLogLevel(PlayClipsSampleConfig::AdjustLogLevel);
+
+    Adjust2dx::start(adjustConfig);
 
     // it's an autorelease object
     auto scene = PlayClipsSample::createScene();
