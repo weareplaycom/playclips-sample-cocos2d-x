@@ -21,6 +21,24 @@
 		0D7A5D571FC341C500F4D73F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D7A5D551FC341C500F4D73F /* Media.xcassets */; };
 		0D9CE94A1FBC346E0047E63D /* playclips_400.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9CE9491FBC346E0047E63D /* playclips_400.png */; };
 		0D9CE94B1FBC346E0047E63D /* playclips_400.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9CE9491FBC346E0047E63D /* playclips_400.png */; };
+		0DAFEC981FCD7FA800C6816E /* AdjustSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAFEC971FCD7FA800C6816E /* AdjustSdk.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		0DAFEC9D1FCD84E100C6816E /* AdjustSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAFEC971FCD7FA800C6816E /* AdjustSdk.framework */; };
+		0DAFEC9F1FCD8F3500C6816E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAFEC991FCD7FEA00C6816E /* AdSupport.framework */; };
+		0DAFECA01FCD8F3500C6816E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAFEC9A1FCD7FEA00C6816E /* iAd.framework */; };
+		0DAFECA51FCD90A300C6816E /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAFECA41FCD90A300C6816E /* GameController.framework */; };
+		0DAFECC21FCD914000C6816E /* ADJAdjust2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECA81FCD914000C6816E /* ADJAdjust2dx.mm */; };
+		0DAFECC31FCD914000C6816E /* ADJConfig2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAA1FCD914000C6816E /* ADJConfig2dx.mm */; };
+		0DAFECC41FCD914000C6816E /* ADJDelegate2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAC1FCD914000C6816E /* ADJDelegate2dx.mm */; };
+		0DAFECC51FCD914000C6816E /* ADJEvent2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAE1FCD914000C6816E /* ADJEvent2dx.mm */; };
+		0DAFECC61FCD914000C6816E /* Adjust2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAF1FCD914000C6816E /* Adjust2dx.cpp */; };
+		0DAFECC71FCD914000C6816E /* AdjustAttribution2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB11FCD914000C6816E /* AdjustAttribution2dx.cpp */; };
+		0DAFECC81FCD914000C6816E /* AdjustConfig2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB31FCD914000C6816E /* AdjustConfig2dx.cpp */; };
+		0DAFECC91FCD914000C6816E /* AdjustEvent2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB51FCD914000C6816E /* AdjustEvent2dx.cpp */; };
+		0DAFECCA1FCD914000C6816E /* AdjustEventFailure2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB71FCD914000C6816E /* AdjustEventFailure2dx.cpp */; };
+		0DAFECCB1FCD914000C6816E /* AdjustEventSuccess2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB91FCD914000C6816E /* AdjustEventSuccess2dx.cpp */; };
+		0DAFECCC1FCD914000C6816E /* AdjustProxy2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECBB1FCD914000C6816E /* AdjustProxy2dx.cpp */; };
+		0DAFECCD1FCD914000C6816E /* AdjustSessionFailure2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECBD1FCD914000C6816E /* AdjustSessionFailure2dx.cpp */; };
+		0DAFECCE1FCD914000C6816E /* AdjustSessionSuccess2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECBF1FCD914000C6816E /* AdjustSessionSuccess2dx.cpp */; };
 		1AC6FB21180E996B004C840B /* libcocos2d Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */; };
 		1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AC6FB07180E9839004C840B /* libcocos2d iOS.a */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -116,6 +134,37 @@
 		0D7A5D521FC319A600F4D73F /* catalog.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = catalog.json; sourceTree = "<group>"; };
 		0D7A5D551FC341C500F4D73F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		0D9CE9491FBC346E0047E63D /* playclips_400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playclips_400.png; sourceTree = "<group>"; };
+		0DAFEC971FCD7FA800C6816E /* AdjustSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdjustSdk.framework; sourceTree = "<group>"; };
+		0DAFEC991FCD7FEA00C6816E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
+		0DAFEC9A1FCD7FEA00C6816E /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/iAd.framework; sourceTree = DEVELOPER_DIR; };
+		0DAFECA41FCD90A300C6816E /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
+		0DAFECA71FCD914000C6816E /* ADJAdjust2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADJAdjust2dx.h; path = Adjust/ADJAdjust2dx.h; sourceTree = "<group>"; };
+		0DAFECA81FCD914000C6816E /* ADJAdjust2dx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ADJAdjust2dx.mm; path = Adjust/ADJAdjust2dx.mm; sourceTree = "<group>"; };
+		0DAFECA91FCD914000C6816E /* ADJConfig2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADJConfig2dx.h; path = Adjust/ADJConfig2dx.h; sourceTree = "<group>"; };
+		0DAFECAA1FCD914000C6816E /* ADJConfig2dx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ADJConfig2dx.mm; path = Adjust/ADJConfig2dx.mm; sourceTree = "<group>"; };
+		0DAFECAB1FCD914000C6816E /* ADJDelegate2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADJDelegate2dx.h; path = Adjust/ADJDelegate2dx.h; sourceTree = "<group>"; };
+		0DAFECAC1FCD914000C6816E /* ADJDelegate2dx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ADJDelegate2dx.mm; path = Adjust/ADJDelegate2dx.mm; sourceTree = "<group>"; };
+		0DAFECAD1FCD914000C6816E /* ADJEvent2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADJEvent2dx.h; path = Adjust/ADJEvent2dx.h; sourceTree = "<group>"; };
+		0DAFECAE1FCD914000C6816E /* ADJEvent2dx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ADJEvent2dx.mm; path = Adjust/ADJEvent2dx.mm; sourceTree = "<group>"; };
+		0DAFECAF1FCD914000C6816E /* Adjust2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Adjust2dx.cpp; path = Adjust/Adjust2dx.cpp; sourceTree = "<group>"; };
+		0DAFECB01FCD914000C6816E /* Adjust2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Adjust2dx.h; path = Adjust/Adjust2dx.h; sourceTree = "<group>"; };
+		0DAFECB11FCD914000C6816E /* AdjustAttribution2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustAttribution2dx.cpp; path = Adjust/AdjustAttribution2dx.cpp; sourceTree = "<group>"; };
+		0DAFECB21FCD914000C6816E /* AdjustAttribution2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustAttribution2dx.h; path = Adjust/AdjustAttribution2dx.h; sourceTree = "<group>"; };
+		0DAFECB31FCD914000C6816E /* AdjustConfig2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustConfig2dx.cpp; path = Adjust/AdjustConfig2dx.cpp; sourceTree = "<group>"; };
+		0DAFECB41FCD914000C6816E /* AdjustConfig2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustConfig2dx.h; path = Adjust/AdjustConfig2dx.h; sourceTree = "<group>"; };
+		0DAFECB51FCD914000C6816E /* AdjustEvent2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustEvent2dx.cpp; path = Adjust/AdjustEvent2dx.cpp; sourceTree = "<group>"; };
+		0DAFECB61FCD914000C6816E /* AdjustEvent2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustEvent2dx.h; path = Adjust/AdjustEvent2dx.h; sourceTree = "<group>"; };
+		0DAFECB71FCD914000C6816E /* AdjustEventFailure2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustEventFailure2dx.cpp; path = Adjust/AdjustEventFailure2dx.cpp; sourceTree = "<group>"; };
+		0DAFECB81FCD914000C6816E /* AdjustEventFailure2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustEventFailure2dx.h; path = Adjust/AdjustEventFailure2dx.h; sourceTree = "<group>"; };
+		0DAFECB91FCD914000C6816E /* AdjustEventSuccess2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustEventSuccess2dx.cpp; path = Adjust/AdjustEventSuccess2dx.cpp; sourceTree = "<group>"; };
+		0DAFECBA1FCD914000C6816E /* AdjustEventSuccess2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustEventSuccess2dx.h; path = Adjust/AdjustEventSuccess2dx.h; sourceTree = "<group>"; };
+		0DAFECBB1FCD914000C6816E /* AdjustProxy2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustProxy2dx.cpp; path = Adjust/AdjustProxy2dx.cpp; sourceTree = "<group>"; };
+		0DAFECBC1FCD914000C6816E /* AdjustProxy2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustProxy2dx.h; path = Adjust/AdjustProxy2dx.h; sourceTree = "<group>"; };
+		0DAFECBD1FCD914000C6816E /* AdjustSessionFailure2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustSessionFailure2dx.cpp; path = Adjust/AdjustSessionFailure2dx.cpp; sourceTree = "<group>"; };
+		0DAFECBE1FCD914000C6816E /* AdjustSessionFailure2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustSessionFailure2dx.h; path = Adjust/AdjustSessionFailure2dx.h; sourceTree = "<group>"; };
+		0DAFECBF1FCD914000C6816E /* AdjustSessionSuccess2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AdjustSessionSuccess2dx.cpp; path = Adjust/AdjustSessionSuccess2dx.cpp; sourceTree = "<group>"; };
+		0DAFECC01FCD914000C6816E /* AdjustSessionSuccess2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdjustSessionSuccess2dx.h; path = Adjust/AdjustSessionSuccess2dx.h; sourceTree = "<group>"; };
+		0DAFECD11FCD977300C6816E /* PlayClipsSampleConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayClipsSampleConfig.h; sourceTree = "<group>"; };
 		1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2d_libs.xcodeproj; path = ../cocos2d/build/cocos2d_libs.xcodeproj; sourceTree = "<group>"; };
 		1ACB3243164770DE00914215 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../cocos2dx/platform/third_party/ios/libraries/libcurl.a; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -182,11 +231,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DAFECA51FCD90A300C6816E /* GameController.framework in Frameworks */,
+				0DAFEC9F1FCD8F3500C6816E /* AdSupport.framework in Frameworks */,
+				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
+				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
+				0DAFECA01FCD8F3500C6816E /* iAd.framework in Frameworks */,
+				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
+				0DAFEC981FCD7FA800C6816E /* AdjustSdk.framework in Frameworks */,
 				0D29213A1FBEF67A0034B6DC /* MediaPlayer.framework in Frameworks */,
 				294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */,
 				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
-				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
 				D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -195,8 +250,6 @@
 				BF1712471292920000B8313A /* libz.dylib in Frameworks */,
 				BF1C47F01293687400B63C5D /* QuartzCore.framework in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
-				D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */,
-				D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DAFEC9D1FCD84E100C6816E /* AdjustSdk.framework in Frameworks */,
 				5087E76817EB910900C73F5D /* QuartzCore.framework in Frameworks */,
 				5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */,
 				5087E76B17EB910900C73F5D /* AudioToolbox.framework in Frameworks */,
@@ -235,6 +289,39 @@
 			);
 			name = ios;
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		0DAFECD01FCD943A00C6816E /* Adjust */ = {
+			isa = PBXGroup;
+			children = (
+				0DAFECA71FCD914000C6816E /* ADJAdjust2dx.h */,
+				0DAFECA81FCD914000C6816E /* ADJAdjust2dx.mm */,
+				0DAFECA91FCD914000C6816E /* ADJConfig2dx.h */,
+				0DAFECAA1FCD914000C6816E /* ADJConfig2dx.mm */,
+				0DAFECAB1FCD914000C6816E /* ADJDelegate2dx.h */,
+				0DAFECAC1FCD914000C6816E /* ADJDelegate2dx.mm */,
+				0DAFECAD1FCD914000C6816E /* ADJEvent2dx.h */,
+				0DAFECAE1FCD914000C6816E /* ADJEvent2dx.mm */,
+				0DAFECAF1FCD914000C6816E /* Adjust2dx.cpp */,
+				0DAFECB01FCD914000C6816E /* Adjust2dx.h */,
+				0DAFECB11FCD914000C6816E /* AdjustAttribution2dx.cpp */,
+				0DAFECB21FCD914000C6816E /* AdjustAttribution2dx.h */,
+				0DAFECB31FCD914000C6816E /* AdjustConfig2dx.cpp */,
+				0DAFECB41FCD914000C6816E /* AdjustConfig2dx.h */,
+				0DAFECB51FCD914000C6816E /* AdjustEvent2dx.cpp */,
+				0DAFECB61FCD914000C6816E /* AdjustEvent2dx.h */,
+				0DAFECB71FCD914000C6816E /* AdjustEventFailure2dx.cpp */,
+				0DAFECB81FCD914000C6816E /* AdjustEventFailure2dx.h */,
+				0DAFECB91FCD914000C6816E /* AdjustEventSuccess2dx.cpp */,
+				0DAFECBA1FCD914000C6816E /* AdjustEventSuccess2dx.h */,
+				0DAFECBB1FCD914000C6816E /* AdjustProxy2dx.cpp */,
+				0DAFECBC1FCD914000C6816E /* AdjustProxy2dx.h */,
+				0DAFECBD1FCD914000C6816E /* AdjustSessionFailure2dx.cpp */,
+				0DAFECBE1FCD914000C6816E /* AdjustSessionFailure2dx.h */,
+				0DAFECBF1FCD914000C6816E /* AdjustSessionSuccess2dx.cpp */,
+				0DAFECC01FCD914000C6816E /* AdjustSessionSuccess2dx.h */,
+			);
+			name = Adjust;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -273,6 +360,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0DAFECA41FCD90A300C6816E /* GameController.framework */,
+				0DAFEC991FCD7FEA00C6816E /* AdSupport.framework */,
+				0DAFEC9A1FCD7FEA00C6816E /* iAd.framework */,
+				0DAFEC971FCD7FA800C6816E /* AdjustSdk.framework */,
 				0D2921391FBEF67A0034B6DC /* MediaPlayer.framework */,
 				0D2921371FBEEECF0034B6DC /* MediaPlayer.framework */,
 				294D0D631D0D56D500F7F5D4 /* CoreText.framework */,
@@ -318,12 +409,14 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0DAFECD01FCD943A00C6816E /* Adjust */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* PlayClipsSampleScene.cpp */,
 				46880B8719C43A87006E1F66 /* PlayClipsSampleScene.h */,
 				0D6B616F1FC5916D0053A7C7 /* PlayClipsModels.cpp */,
 				0D6B61701FC5916D0053A7C7 /* PlayClipsModels.h */,
+				0DAFECD11FCD977300C6816E /* PlayClipsSampleConfig.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -527,11 +620,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				0DAFECC21FCD914000C6816E /* ADJAdjust2dx.mm in Sources */,
+				0DAFECC41FCD914000C6816E /* ADJDelegate2dx.mm in Sources */,
+				0DAFECC71FCD914000C6816E /* AdjustAttribution2dx.cpp in Sources */,
+				0DAFECC31FCD914000C6816E /* ADJConfig2dx.mm in Sources */,
 				0D6B61711FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */,
+				0DAFECC81FCD914000C6816E /* AdjustConfig2dx.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* PlayClipsSampleScene.cpp in Sources */,
+				0DAFECCC1FCD914000C6816E /* AdjustProxy2dx.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
+				0DAFECC61FCD914000C6816E /* Adjust2dx.cpp in Sources */,
+				0DAFECC51FCD914000C6816E /* ADJEvent2dx.mm in Sources */,
+				0DAFECCE1FCD914000C6816E /* AdjustSessionSuccess2dx.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
+				0DAFECCA1FCD914000C6816E /* AdjustEventFailure2dx.cpp in Sources */,
+				0DAFECC91FCD914000C6816E /* AdjustEvent2dx.cpp in Sources */,
+				0DAFECCB1FCD914000C6816E /* AdjustEventSuccess2dx.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
+				0DAFECCD1FCD914000C6816E /* AdjustSessionFailure2dx.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,6 +678,10 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = H5GJ5E6WGY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -586,10 +696,7 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"$(_COCOS_LIB_IOS_BEGIN)",
-					"$(_COCOS_LIB_IOS_END)",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.playclips.sample;
 				PRODUCT_NAME = "PlayClips sample-mobile";
 				SDKROOT = iphoneos;
@@ -610,6 +717,10 @@
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = H5GJ5E6WGY;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -623,10 +734,7 @@
 				INFOPLIST_FILE = ios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LIBRARY_SEARCH_PATHS = "";
-				OTHER_LDFLAGS = (
-					"$(_COCOS_LIB_IOS_BEGIN)",
-					"$(_COCOS_LIB_IOS_END)",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.playclips.sample;
 				PRODUCT_NAME = "PlayClips sample-mobile";
 				SDKROOT = iphoneos;
@@ -646,6 +754,10 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				DEVELOPMENT_TEAM = H5GJ5E6WGY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -665,9 +777,7 @@
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_MAC_BEGIN)",
 					"$(_COCOS_LIB_MAC_END)",
-					"-lsqlite3",
-					"-lz",
-					"-lxml2",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "PlayClips sample-desktop";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -685,6 +795,10 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				DEVELOPMENT_TEAM = H5GJ5E6WGY;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = mac/Prefix.pch;
@@ -703,9 +817,7 @@
 				OTHER_LDFLAGS = (
 					"$(_COCOS_LIB_MAC_BEGIN)",
 					"$(_COCOS_LIB_MAC_END)",
-					"-lsqlite3",
-					"-lz",
-					"-lxml2",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "PlayClips sample-desktop";
 				PROVISIONING_PROFILE_SPECIFIER = "";
