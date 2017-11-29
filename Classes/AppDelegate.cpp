@@ -103,16 +103,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    std::string appToken = PlayClipsSampleConfig::AdjustAppToken;
-    std::string environment = PlayClipsSampleConfig::AdjustEnvironment;
-
-    AdjustConfig2dx adjustConfig = AdjustConfig2dx(appToken, environment);
-    adjustConfig.setLogLevel(PlayClipsSampleConfig::AdjustLogLevel);
-
-    Adjust2dx::start(adjustConfig);
-
     // it's an autorelease object
     auto scene = PlayClipsSample::createScene();
+
+    AdjustConfig2dx adjustConfig = AdjustConfig2dx(PlayClipsSampleConfig::adjustAppToken,
+                                                   PlayClipsSampleConfig::adjustEnvironment);
+
+    adjustConfig.setLogLevel(PlayClipsSampleConfig::adjustLogLevel);
+
+    adjustConfig.setDeferredDeeplinkCallback(PlayClipsSample::deferredDeeplinkCallbackMethod);
+
+    Adjust2dx::start(adjustConfig);
 
     director->runWithScene(scene);
 

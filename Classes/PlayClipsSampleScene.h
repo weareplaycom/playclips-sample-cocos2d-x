@@ -15,8 +15,10 @@ class PlayClipsSample : public cocos2d::Scene
 {
 public:
     virtual bool init() override;
-    
-    static cocos2d::Scene* createScene();
+
+    static Scene* createScene();
+
+    static bool deferredDeeplinkCallbackMethod(std::string deeplink);
 
     void menuCloseCallback(cocos2d::Ref* pSender);
     

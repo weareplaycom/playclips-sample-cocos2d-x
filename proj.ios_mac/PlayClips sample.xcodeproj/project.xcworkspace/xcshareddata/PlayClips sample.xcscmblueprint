@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4C10292C6E25442B2F4FB1C26A140AE67EA23D9A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "852ED3691A47A99B0D19C820A500AE9772B2A44E" : 9223372036854775807,
+    "4C10292C6E25442B2F4FB1C26A140AE67EA23D9A" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "59585387-EB52-459A-A78C-5E364F91E524",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "852ED3691A47A99B0D19C820A500AE9772B2A44E" : "MyCppGame\/cocos2d\/",
+    "4C10292C6E25442B2F4FB1C26A140AE67EA23D9A" : "MyCppGame\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PlayClips sample",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "proj.ios_mac\/PlayClips sample.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:weareplaycom\/playclips-sample-cocos2d-x.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4C10292C6E25442B2F4FB1C26A140AE67EA23D9A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:cocos2d\/cocos2d-x.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "852ED3691A47A99B0D19C820A500AE9772B2A44E"
+    }
+  ]
+}

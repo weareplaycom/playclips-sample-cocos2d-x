@@ -4,7 +4,7 @@
 
 
 namespace PlayClipsSampleConfig {
-    const std::string AdjustEnvironment = AdjustEnvironmentSandbox2dx;
-    const std::string AdjustAppToken = "{your-app-token}";
-    const AdjustLogLevel2dx AdjustLogLevel = AdjustLogLevel2dxInfo;
+    const std::string adjustAppToken = "{your-app-token}";
+    std::string adjustEnvironment = "production";
+    const AdjustLogLevel2dx adjustLogLevel = AdjustLogLevel2dx::AdjustLogLevel2dxInfo;
 }
