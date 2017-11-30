@@ -1,12 +1,17 @@
 #include <iostream>
 #include <set>
 #include "SimpleAudioEngine.h"
+
+#include "Adjust/Adjust2dx.h"
+
 #include "json/rapidjson.h"
 #include "json/document-wrapper.h"
 #include "json/writer.h"
 #include "json/stringbuffer.h"
 #include "network/HttpClient.h"
+#include "network/Uri.h"
 #include "ui/UIVideoPlayer.h"
+
 #include "PlayClipsSampleScene.h"
 #include "PlayClipsModels.h"
 #include "extensions/assets-manager/AssetsManagerEx.h"
@@ -19,9 +24,12 @@ using namespace network;
 
 #define CONNECT_TO_CDN 0
 
+PlayClipsSample* privateInstance;
+
 Scene* PlayClipsSample::createScene()
 {
-    return PlayClipsSample::create();
+    privateInstance = PlayClipsSample::create();
+    return privateInstance;
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -31,9 +39,41 @@ static void problemLoading(const char* filename)
     cocos2d::log("Depending on how you compiled you might have to add 'Resources/' in front of filenames in PlayClipsSampleScene.cpp");
 }
 
+
+bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
+    cocos2d::log("\nDeferred deep link received!");
+    // plsample://welcomeback?influencer=Wally&adjust_no_sdkclick=1
+    cocos2d::log("\nURL: %s\n", deeplink.c_str());
+
+    // Notify Adjust
+    Adjust2dx::appWillOpenUrl(deeplink);
+
+    // Obtain influencer and load asset catalog
+    auto deeplinkUri = network::Uri::parse(deeplink);
+
+    auto influencerQueryParam = std::find_if(deeplinkUri.getQueryParams().begin(),
+                                             deeplinkUri.getQueryParams().end(),
+                                             [](std::pair<std::string, std::string> element) {
+                                                 return element.first == "influencer";
+                                             });
+
+    if (influencerQueryParam == deeplinkUri.getQueryParams().end()) {
+        cocos2d::log("Error: Expected influencer but not received");
+    } else {
+        cocos2d::log("Influencer is: %s", influencerQueryParam->second.c_str());
+        auto component = (MenuItemFont*)privateInstance->menuStart->getChildByName("waiting");
+        component->setString("The influencer \nassigned to you is:\n\n" + influencerQueryParam->second + "\n\nClick to start!");
+        // TODO: launch influencer asset download
+
+    }
+
+    return true;
+}
+
 // Initialize the instance
 bool PlayClipsSample::init()
 {
+
     // A Scene is a container that holds Sprites, Labels, Nodes and other objects that your game needs.
     // A Scene is responsible for running game logic and rendering the content on a per-frame basis.
     
@@ -72,13 +112,14 @@ bool PlayClipsSample::init()
     this->addChild(menu, 1);
     
     // Start menu item
-    auto loadCatalog = MenuItemFont::create("Press here to start",
+    auto loadCatalog = MenuItemFont::create("Waiting for influencer...",
                                             CC_CALLBACK_1(PlayClipsSample::loadCatalog, this));
     
     loadCatalog->setAnchorPoint(Vec2(0.5,0.5));
     loadCatalog->setFontNameObj("Arial");
     loadCatalog->setFontSizeObj(20);
     loadCatalog->setPosition(Vec2(0, 0));
+    loadCatalog->setName("waiting");
 
     // create start menu, it's an autorelease object
     menuStart = Menu::create(loadCatalog, NULL);
@@ -134,7 +175,6 @@ bool PlayClipsSample::init()
     //auto audio = CocosDenshion::SimpleAudioEngine::getInstance();
     //audio->preloadBackgroundMusic("demo.mp3");
     //audio->playBackgroundMusic("demo.mp3");
-    
     return true;
 }
 

@@ -18,7 +18,9 @@ public:
 
     void downloadZipCatalog();
     
-    static cocos2d::Scene* createScene();
+    static Scene* createScene();
+
+    static bool deferredDeeplinkCallbackMethod(std::string deeplink);
 
     void menuCloseCallback(cocos2d::Ref* pSender);
     

@@ -1,4 +1,7 @@
 #include "AppDelegate.h"
+
+#include "Adjust/Adjust2dx.h"
+#include "PlayClipsSampleConfig.h"
 #include "PlayClipsSampleScene.h"
 
 //#define USE_AUDIO_ENGINE 1
@@ -102,6 +105,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // it's an autorelease object
     auto scene = PlayClipsSample::createScene();
+
+    AdjustConfig2dx adjustConfig = AdjustConfig2dx(PlayClipsSampleConfig::adjustAppToken,
+                                                   PlayClipsSampleConfig::adjustEnvironment);
+
+    adjustConfig.setLogLevel(PlayClipsSampleConfig::adjustLogLevel);
+
+    adjustConfig.setDeferredDeeplinkCallback(PlayClipsSample::deferredDeeplinkCallbackMethod);
+
+    Adjust2dx::start(adjustConfig);
 
     director->runWithScene(scene);
 
