@@ -18,17 +18,18 @@ public:
 
     static Scene* createScene();
 
+    void downloadZipCatalog(std::string influencer);
+
     static bool deferredDeeplinkCallbackMethod(std::string deeplink);
 
     void menuCloseCallback(cocos2d::Ref* pSender);
     
-    void onInfluencerSelected(cocos2d::Ref *pSender);
-    
+    void influencerSelected();
+
     void loadCatalog(cocos2d::Ref* pSender);
-    void playVideo(cocos2d::Ref* pSender, const Influencer* inf, std::string tag);
+    void playVideo(cocos2d::Ref* pSender, std::string tag);
     
-    void onHttpRequestCatalog(HttpClient *sender, HttpResponse *response);
-    void loadJsonCatalog(const char* json);
+    void loadJsonCatalog(const char* json, std::string influencer_id);
     
     // implement the "static create()" method manually
     CREATE_FUNC(PlayClipsSample);
@@ -39,6 +40,5 @@ private:
     cocos2d::Menu* menuStart;
     cocos2d::Sprite* sprite;
     rapidjson::Document jsonCatalog;
-    std::map<std::string, Influencer*> influencers;
-    
+    Influencer* influencer;    
 };

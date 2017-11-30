@@ -3,6 +3,8 @@
 #include <vector>
 #include <set>
 
+#include "network/Uri.h"
+
 class Video {
 
 public:
@@ -56,4 +58,15 @@ private:
     std::string name;
     std::string thumbnail;
     std::vector<Video*> videos;
+};
+
+class DeferredDeeplink {
+public:
+    DeferredDeeplink(std::string deeplink);
+    std::string getInfluencer();
+    bool isValid();
+
+private:
+    std::string deeplink;
+    cocos2d::network::Uri deeplinkUri;
 };

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <stdio.h>
 #include "SimpleAudioEngine.h"
 
 #include "Adjust/Adjust2dx.h"
@@ -9,22 +10,25 @@
 #include "json/writer.h"
 #include "json/stringbuffer.h"
 #include "network/HttpClient.h"
-#include "network/Uri.h"
 #include "ui/UIVideoPlayer.h"
+#include "extensions/assets-manager/AssetsManagerEx.h"
+#include "extensions/assets-manager/CCEventListenerAssetsManagerEx.h"
 
 #include "PlayClipsSampleScene.h"
 #include "PlayClipsModels.h"
 
 USING_NS_CC;
+USING_NS_CC_EXT;
+
 using namespace rapidjson;
 using namespace network;
-
-#define CONNECT_TO_CDN 1
 
 PlayClipsSample* privateInstance;
 
 Scene* PlayClipsSample::createScene()
 {
+    // We need this privateInstance for the deferredDeeplinkCallbackMethod
+    // as we cannot use std::function and std::bind
     privateInstance = PlayClipsSample::create();
     return privateInstance;
 }
@@ -36,35 +40,42 @@ static void problemLoading(const char* filename)
     cocos2d::log("Depending on how you compiled you might have to add 'Resources/' in front of filenames in PlayClipsSampleScene.cpp");
 }
 
+static std::string loadInfluencerId() {
+    return UserDefault::getInstance()->getStringForKey("playclips.influencer");
+}
 
+static void saveInfluencerId(std::string influencer_id) {
+    UserDefault::getInstance()->setStringForKey("playclips.influencer", influencer_id);
+}
+
+// static method
 bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
     cocos2d::log("\nDeferred deep link received!");
-    // plsample://welcomeback?influencer=Wally&adjust_no_sdkclick=1
+
+    // Example of deeplink as sent by Adjust:
+    //      plsample://welcomeback?influencer=Wally&adjust_no_sdkclick=1
     cocos2d::log("\nURL: %s\n", deeplink.c_str());
 
     // Notify Adjust
     Adjust2dx::appWillOpenUrl(deeplink);
 
-    // Obtain influencer and load asset catalog
-    auto deeplinkUri = network::Uri::parse(deeplink);
+    DeferredDeeplink playClipsDeeplink(deeplink);
 
-    auto influencerQueryParam = std::find_if(deeplinkUri.getQueryParams().begin(),
-                                             deeplinkUri.getQueryParams().end(),
-                                             [](std::pair<std::string, std::string> element) {
-                                                 return element.first == "influencer";
-                                             });
+    auto component = (MenuItemFont*)privateInstance->menuStart->getChildByName("waiting");
 
-    if (influencerQueryParam == deeplinkUri.getQueryParams().end()) {
-        cocos2d::log("Error: Expected influencer but not received");
+    if (playClipsDeeplink.isValid()) {
+        // TODO: send an InApp event to track the success
+        cocos2d::log("Influencer is: %s", playClipsDeeplink.getInfluencer().c_str());
+
+        saveInfluencerId(playClipsDeeplink.getInfluencer());
+        component->setString("The influencer \nassigned to you is:\n\n" + playClipsDeeplink.getInfluencer() + "\n\nClick to start!");
+        privateInstance->downloadZipCatalog(playClipsDeeplink.getInfluencer());
+        return true;
     } else {
-        cocos2d::log("Influencer is: %s", influencerQueryParam->second.c_str());
-        auto component = (MenuItemFont*)privateInstance->menuStart->getChildByName("waiting");
-        component->setString("The influencer \nassigned to you is:\n\n" + influencerQueryParam->second + "\n\nClick to start!");
-        // TODO: launch influencer asset download
-
+        cocos2d::log("Error: Expected influencer but not received");
+        // TODO: send an InApp event to track the error
+        return false;
     }
-
-    return true;
 }
 
 // Initialize the instance
@@ -109,19 +120,26 @@ bool PlayClipsSample::init()
     this->addChild(menu, 1);
     
     // Start menu item
-    auto loadCatalog = MenuItemFont::create("Waiting for influencer...",
+    auto influencerItem = MenuItemFont::create("Waiting for influencer...",
                                             CC_CALLBACK_1(PlayClipsSample::loadCatalog, this));
     
-    loadCatalog->setAnchorPoint(Vec2(0.5,0.5));
-    loadCatalog->setFontNameObj("Arial");
-    loadCatalog->setFontSizeObj(20);
-    loadCatalog->setPosition(Vec2(0, 0));
-    loadCatalog->setName("waiting");
-
+    influencerItem->setAnchorPoint(Vec2(0.5,0.5));
+    influencerItem->setFontNameObj("Arial");
+    influencerItem->setFontSizeObj(20);
+    influencerItem->setPosition(Vec2(0, 0));
+    influencerItem->setName("waiting");
+    
     // create start menu, it's an autorelease object
-    menuStart = Menu::create(loadCatalog, NULL);
+    menuStart = Menu::create(influencerItem, NULL);
     menuStart->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height/2));
     this->addChild(menuStart, 1);
+    
+    std::string influencer = loadInfluencerId();
+    
+    if (!influencer.empty()) {
+        auto component = (MenuItemFont*)this->menuStart->getChildByName("waiting");
+        component->setString("The influencer \nassigned to you is:\n\n" + influencer + "\n\nClick to start!");
+    }
 
     // add "PlayClips" icon
     // a sprite was a bitmap image with hardware support to be movable.
@@ -174,6 +192,112 @@ bool PlayClipsSample::init()
     return true;
 }
 
+std::string generateInfluencerFile(std::string influencer) {
+    FileUtils *fileUtils = FileUtils::getInstance();
+    std::string path = FileUtils::getInstance()->getWritablePath() + influencer + ".catalog";
+    
+    if (fileUtils->isFileExist("playclips.catalog")) {
+        rapidjson::Document jsonCatalog;
+        std::string data = fileUtils->getStringFromFile("playclips.catalog");
+        jsonCatalog.Parse<kParseDefaultFlags>(data.c_str());
+        std::string placeholder = "{influencer}";
+        
+        rapidjson::Value& manifestUrl = jsonCatalog["remoteManifestUrl"];
+        std::string manifestValue = manifestUrl.GetString();
+        manifestValue = manifestValue.replace(manifestValue.find(placeholder), placeholder.length(), influencer);
+        manifestUrl.SetString(manifestValue.c_str(), manifestValue.length());
+        
+        rapidjson::Value& versionUrl = jsonCatalog["remoteVersionUrl"];
+        std::string versionValue = versionUrl.GetString();
+        versionValue = versionValue.replace(versionValue.find(placeholder), placeholder.length(), influencer);
+        versionUrl.SetString(versionValue.c_str(), versionValue.length());
+        StringBuffer buffer;
+        Writer<StringBuffer> writer(buffer);
+        jsonCatalog.Accept(writer);
+
+        FILE *fp = fopen(path.c_str(), "w");
+        if (! fp) {
+            CCLOG("can not create file %s", path.c_str());
+        } else {
+            fputs(buffer.GetString(), fp);
+            fclose(fp);
+            CCLOG("File created: %s", path.c_str());
+        }
+    } else {
+        CCLOG("no luck");
+    }
+    return path;
+}
+
+void PlayClipsSample::downloadZipCatalog(std::string influencer)
+{
+    // TODO: handle errors while creating the file
+    std::string influencerCatalog = generateInfluencerFile(influencer);
+    std::string storagePath = FileUtils::getInstance()->getWritablePath() + "playclips";
+    cocos2d::log("Storage path for the catalog: %s", storagePath.c_str());
+    
+    AssetsManagerEx* _am = AssetsManagerEx::create(influencerCatalog, storagePath);
+    
+    _am->retain();
+    
+    if (!_am->getLocalManifest()->isLoaded()) {
+        cocos2d::log("Fail to update assets, step skipped.");
+    } else {
+        EventListenerAssetsManagerEx* _amListener = EventListenerAssetsManagerEx::create(_am, [&_am, this](EventAssetsManagerEx* event) {
+            static int failCount = 0;
+            
+            switch (event->getEventCode()) {
+                case EventAssetsManagerEx::EventCode::ERROR_NO_LOCAL_MANIFEST:
+                    cocos2d::log("No local manifest file found, skip assets update.");
+                    break;
+                case EventAssetsManagerEx::EventCode::UPDATE_PROGRESSION: {
+                    std::string assetId = event->getAssetId();
+                    float percent = event->getPercent();
+                    std::string str;
+                    if (assetId == AssetsManagerEx::VERSION_ID) {
+                        str = StringUtils::format("Version file: %.2f", percent) + "%";
+                    } else if (assetId == AssetsManagerEx::MANIFEST_ID) {
+                        str = StringUtils::format("Manifest file: %.2f", percent) + "%";
+                    } else {
+                        str = StringUtils::format("%.2f", percent) + "%";
+                        cocos2d::log("%.2f Percent", percent);
+                    }
+                    break;
+                }
+                case EventAssetsManagerEx::EventCode::ERROR_DOWNLOAD_MANIFEST:
+                case EventAssetsManagerEx::EventCode::ERROR_PARSE_MANIFEST:
+                    cocos2d::log("Fail to download manifest file, update skipped.");
+                    break;
+                case EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE:
+                case EventAssetsManagerEx::EventCode::UPDATE_FINISHED: {
+                    cocos2d::log("Update finished. %s", event->getMessage().c_str());
+                    break;
+                }
+                case EventAssetsManagerEx::EventCode::UPDATE_FAILED:
+                    cocos2d::log("Update failed. %s", event->getMessage().c_str());
+                    failCount ++;
+                    if (failCount < 5) {
+                        _am->downloadFailedAssets();
+                    } else {
+                        CCLOG("Reach maximum fail count, exit update process");
+                        failCount = 0;
+                    }
+                    break;
+                case EventAssetsManagerEx::EventCode::ERROR_UPDATING:
+                    cocos2d::log("Asset %s : %s", event->getAssetId().c_str(), event->getMessage().c_str());
+                    break;
+                case EventAssetsManagerEx::EventCode::ERROR_DECOMPRESS:
+                    cocos2d::log("%s", event->getMessage().c_str());
+                    break;
+                default:
+                    break;
+            }
+        });
+        Director::getInstance()->getEventDispatcher()->addEventListenerWithFixedPriority(_amListener, 1);
+        _am->update();
+    }
+}
+
  
 void PlayClipsSample::update(float delta) {
     // delta: amount of time, in seconds since the last time the update function was called
@@ -201,83 +325,33 @@ void PlayClipsSample::menuCloseCallback(Ref* pSender)
     //_eventDispatcher->dispatchEvent(&customEndEvent);
 }
 
-void PlayClipsSample::onHttpRequestCatalog(network::HttpClient *sender, network::HttpResponse *response) {
-    
-    if (response && response->getResponseCode() == 200 && response->getResponseData()) {
-        std::vector<char> *data = response->getResponseData();
-        // Extract information from JSON payload
-        loadJsonCatalog(data->data());
-    }
-    else {
-        cocos2d::log("Error while loading the catalog: %ld", response->getResponseCode());
-    }
-}
-
-void PlayClipsSample::loadJsonCatalog(const char* data) {
+void PlayClipsSample::loadJsonCatalog(const char* data, std::string influencer_id) {
     jsonCatalog.Parse<kParseDefaultFlags>(data);
     
-    typedef GenericDocument<UTF8<>, MemoryPoolAllocator<>, CrtAllocator>::ValueType InfluencerData;
+    Influencer* inf = new Influencer(influencer_id,
+                                     jsonCatalog["name"].GetString(),
+                                     jsonCatalog["thumbnail"].GetString());
     
-    Vector<MenuItem*> influencerNames;
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-    
-    const char* inf_id;
-    
-    for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog.MemberBegin(); itr != jsonCatalog.MemberEnd(); ++itr) {
-        cocos2d::log("Loaded influencer %s with name %s",
-                     itr->name.GetString(),
-                     jsonCatalog[itr->name.GetString()]["name"].GetString());
+    for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog["videos"].MemberBegin();
+         itr != jsonCatalog["videos"].MemberEnd();
+         ++itr) {
         
-        inf_id = itr->name.GetString();
-        
-        Influencer* inf = new Influencer(inf_id,
-                                         jsonCatalog[inf_id]["name"].GetString(),
-                                         jsonCatalog[inf_id]["thumbnail"].GetString());
-        
-        const InfluencerData& inf_data = jsonCatalog[inf_id];
-        
-        for (rapidjson::Value::ConstMemberIterator itr = inf_data["videos"].MemberBegin();
-             itr != inf_data["videos"].MemberEnd();
-             ++itr) {
-            
-            Video* video = new Video(itr->name.GetString(),
-                                     itr->value["location"].GetString(),
-                                     itr->value["weight"].GetInt());
+        Video* video = new Video(itr->name.GetString(),
+                                 itr->value["location"].GetString(),
+                                 itr->value["weight"].GetInt());
 
-            auto tags = itr->value["tags"].GetArray();
-            
-            for (auto& tag:tags) {
-                cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
-                             tag.GetString(),
-                             video->getId().c_str(),
-                             inf->getId().c_str());
-                video->addTag(tag.GetString());
-            }
-            inf->addVideo(video);
-        }
-        influencers[inf->getId()] = inf;
-    }
-    
-    int i = 0;
-    for (auto& inf: influencers) {
-        auto item = MenuItemFont::create(inf.first,
-                                         CC_CALLBACK_1(PlayClipsSample::onInfluencerSelected, this));
+        auto tags = itr->value["tags"].GetArray();
         
-        item->setName(inf.first);
-        item->setFontNameObj("Arial");
-        item->setFontSizeObj(14);
-        item->setAnchorPoint(Vec2(0, 0));
-        item->setPosition(Vec2(origin.x+10, origin.y + 30*(i++)+10));
-        influencerNames.pushBack(item);
+        for (auto& tag:tags) {
+            cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
+                         tag.GetString(),
+                         video->getId().c_str(),
+                         inf->getId().c_str());
+            video->addTag(tag.GetString());
+        }
+        inf->addVideo(video);
     }
-    
-    auto menu = Menu::createWithArray(influencerNames);
-    menu->setAnchorPoint(Vec2(0, 1));
-    menu->setPosition(Vec2(origin.x,
-                           sprite->getPosition().y - 50 - sprite->getContentSize().height / sprite->getScale()
-                           )
-                      );
-    this->addChild(menu, 1);
+    this->influencer = inf;
 }
 
 template<typename R, typename C, typename P>
@@ -317,18 +391,13 @@ Value_type<C> findFirst(const C& c, P pred) {
     return nullptr;
 }
 
-void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
-    MenuItemFont* item = (MenuItemFont *)pSender;
+void PlayClipsSample::influencerSelected() {
     Vector<MenuItem*> tagsMenu;
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    const Influencer* influencer = influencers[item->getName()];
-
-    cocos2d::log("%s", influencer->getId().c_str());
-    
     std::set<std::string> tags;
     
-    forEach(influencer->getVideos(), [&tags](Video* video) {
+    forEach(this->influencer->getVideos(), [&tags](Video* video) {
         forEach(video->getTags(), [&tags](std::string tag){
             tags.insert(tag);
         });
@@ -336,11 +405,10 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     
     cocos2d::log("Tags set size is %lu", tags.size());
     
-    mapWithIndex(tagsMenu, tags, [&origin, &influencer, this](std::string tag, int idx) {
+    mapWithIndex(tagsMenu, tags, [&origin, this](std::string tag, int idx) {
         auto item = MenuItemFont::create(tag,
                                          CC_CALLBACK_1(PlayClipsSample::playVideo,
                                                        this,
-                                                       influencer,
                                                        tag));
         item->setName(tag);
         item->setFontNameObj("Arial");
@@ -358,14 +426,15 @@ void PlayClipsSample::onInfluencerSelected(Ref* pSender) {
     
 }
 
-void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string tag) {
+void PlayClipsSample::playVideo(Ref* pSender, std::string tag) {
 
-    Video* video = inf->getVideoByTag(tag);
+    Video* video = this->influencer->getVideoByTag(tag);
     std::string str = video->getLocation();
     std::string quality_placeholder = "{quality}";
 
     // TODO: user to be able to select the quality, either high, medium or low
     str = str.replace(str.find(quality_placeholder), quality_placeholder.length(), "high");
+    str = FileUtils::getInstance()->getWritablePath()  + "playclips/" + str;
 
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     cocos2d::log("Play Video %s", str.c_str());
@@ -382,11 +451,25 @@ void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string
     videoPlayer->setAnchorPoint(Vec2(1, 1));  // top-right point
     videoPlayer->setPosition(Vec2(x,y));
     
-    // TODO: play the requested video instead of a hardcoded one
-    videoPlayer->setFileName("welcome.mp4");
+    videoPlayer->setFileName(str);
     videoPlayer->setVisible(true);
     videoPlayer->setFullScreenEnabled(false);
-    this->addChild(videoPlayer, 10);
+
+    videoPlayer->addEventListener([this](Ref* pointer, cocos2d::experimental::ui::VideoPlayer::EventType eventType) {
+        cocos2d::log("Received event: %d", eventType);
+        switch (eventType) {
+            case cocos2d::experimental::ui::VideoPlayer::EventType::COMPLETED: {
+                cocos2d::log("Delete player");
+                cocos2d::experimental::ui::VideoPlayer* player = (cocos2d::experimental::ui::VideoPlayer *)pointer;
+                player->onExit();
+                break;
+            }
+            default:
+                break;
+        }
+    });
+
+    this->addChild(videoPlayer, 10, 1);
     videoPlayer->play();
 #else
     std::string unsupportedPlatform = "I was about to reproduce "+video->getId()+", but your platform does not support Video player";
@@ -399,22 +482,14 @@ void PlayClipsSample::playVideo(Ref* pSender, const Influencer* inf, std::string
 void PlayClipsSample::loadCatalog(Ref* pSender)
 {
     menuStart->setVisible(false);
+    std::string influencer_id = loadInfluencerId();
+    cocos2d::log("Loading data from disk for influencer: %s", influencer_id.c_str());
+    std::string influencerCatalogFile = FileUtils::getInstance()->getWritablePath()  +
+                                        "playclips/" +
+                                        influencer_id+
+                                        ".catalog";
     
-// TODO: check connectivity at start to avoid this requirement
-# if CONNECT_TO_CDN
-    const char* CATALOG_URL = "http://cdn-stg.svplayclips.com/metadata.json";
-    
-    network::HttpRequest* request = new (std :: nothrow)network::HttpRequest();
-    request->setUrl(CATALOG_URL);
-    request->setRequestType(network::HttpRequest::Type::GET);
-    request->setResponseCallback(CC_CALLBACK_2(PlayClipsSample::onHttpRequestCatalog, this));
-    cocos2d::network::HttpClient::getInstance()->sendImmediate(request);
-    cocos2d::log("Obtaining catalog from %s", CATALOG_URL);
-    request->release();
-    return;
-#endif
-    cocos2d::log("Loading data from disk");
-    // Load catalog locally (out of coverage)
-    const char * data = FileUtils::getInstance()->getStringFromFile("catalog.json").c_str();
-    loadJsonCatalog(data);
+    const char * data = FileUtils::getInstance()->getStringFromFile(influencerCatalogFile).c_str();
+    this->loadJsonCatalog(data, influencer_id);
+    this->influencerSelected();
 }

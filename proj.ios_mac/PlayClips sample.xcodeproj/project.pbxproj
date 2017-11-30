@@ -82,6 +82,22 @@
 		D44C620E132DFF430009C878 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620D132DFF430009C878 /* AVFoundation.framework */; };
 		D44C6210132DFF4E0009C878 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D44C620F132DFF4E0009C878 /* AudioToolbox.framework */; };
 		D6B0611B1803AB670077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B0611A1803AB670077942B /* CoreMotion.framework */; };
+		EC7A47DD1FD0121B00228EC2 /* playclips.catalog in Resources */ = {isa = PBXBuildFile; fileRef = EC7A47DC1FD0121B00228EC2 /* playclips.catalog */; };
+		EC7A47DE1FD0121B00228EC2 /* playclips.catalog in Resources */ = {isa = PBXBuildFile; fileRef = EC7A47DC1FD0121B00228EC2 /* playclips.catalog */; };
+		EC7A47DF1FD012FE00228EC2 /* ADJAdjust2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECA81FCD914000C6816E /* ADJAdjust2dx.mm */; };
+		EC7A47E01FD012FF00228EC2 /* ADJConfig2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAA1FCD914000C6816E /* ADJConfig2dx.mm */; };
+		EC7A47E11FD012FF00228EC2 /* ADJDelegate2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAC1FCD914000C6816E /* ADJDelegate2dx.mm */; };
+		EC7A47E21FD012FF00228EC2 /* ADJEvent2dx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAE1FCD914000C6816E /* ADJEvent2dx.mm */; };
+		EC7A47E31FD012FF00228EC2 /* Adjust2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECAF1FCD914000C6816E /* Adjust2dx.cpp */; };
+		EC7A47E41FD012FF00228EC2 /* AdjustAttribution2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB11FCD914000C6816E /* AdjustAttribution2dx.cpp */; };
+		EC7A47E51FD012FF00228EC2 /* AdjustConfig2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB31FCD914000C6816E /* AdjustConfig2dx.cpp */; };
+		EC7A47E61FD012FF00228EC2 /* AdjustEvent2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB51FCD914000C6816E /* AdjustEvent2dx.cpp */; };
+		EC7A47E71FD012FF00228EC2 /* AdjustEventFailure2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB71FCD914000C6816E /* AdjustEventFailure2dx.cpp */; };
+		EC7A47E81FD012FF00228EC2 /* AdjustEventSuccess2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECB91FCD914000C6816E /* AdjustEventSuccess2dx.cpp */; };
+		EC7A47E91FD012FF00228EC2 /* AdjustProxy2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECBB1FCD914000C6816E /* AdjustProxy2dx.cpp */; };
+		EC7A47EA1FD012FF00228EC2 /* AdjustSessionFailure2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECBD1FCD914000C6816E /* AdjustSessionFailure2dx.cpp */; };
+		EC7A47EB1FD012FF00228EC2 /* AdjustSessionSuccess2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DAFECBF1FCD914000C6816E /* AdjustSessionSuccess2dx.cpp */; };
+		EC7A47ED1FD014A300228EC2 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC7A47EC1FD014A300228EC2 /* GameController.framework */; };
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
 /* End PBXBuildFile section */
@@ -223,6 +239,8 @@
 		D44C620D132DFF430009C878 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D44C620F132DFF4E0009C878 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D6B0611A1803AB670077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		EC7A47DC1FD0121B00228EC2 /* playclips.catalog */ = {isa = PBXFileReference; lastKnownFileType = text; path = playclips.catalog; sourceTree = "<group>"; };
+		EC7A47EC1FD014A300228EC2 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		ED545A7B1B68A1F400C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libiconv.dylib; sourceTree = DEVELOPER_DIR; };
 		ED545A7D1B68A1FA00C3958E /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -258,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7A47ED1FD014A300228EC2 /* GameController.framework in Frameworks */,
 				0DAFEC9D1FCD84E100C6816E /* AdjustSdk.framework in Frameworks */,
 				5087E76817EB910900C73F5D /* QuartzCore.framework in Frameworks */,
 				5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */,
@@ -363,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				0DAFECA41FCD90A300C6816E /* GameController.framework */,
+				EC7A47EC1FD014A300228EC2 /* GameController.framework */,
 				0DAFEC991FCD7FEA00C6816E /* AdSupport.framework */,
 				0DAFEC9A1FCD7FEA00C6816E /* iAd.framework */,
 				0DAFEC971FCD7FA800C6816E /* AdjustSdk.framework */,
@@ -403,6 +423,7 @@
 				0D9CE9491FBC346E0047E63D /* playclips_400.png */,
 				0D7A5D521FC319A600F4D73F /* catalog.json */,
 				0D7A5D551FC341C500F4D73F /* Media.xcassets */,
+				EC7A47DC1FD0121B00228EC2 /* playclips.catalog */,
 			);
 			name = Resources;
 			path = ../Resources;
@@ -594,6 +615,7 @@
 				5087E77D17EB970100C73F5D /* Default-568h@2x.png in Resources */,
 				0D9CE94A1FBC346E0047E63D /* playclips_400.png in Resources */,
 				521A8E6519F0C34300D177D7 /* Default-736h@3x.png in Resources */,
+				EC7A47DD1FD0121B00228EC2 /* playclips.catalog in Resources */,
 				0D29213C1FBEFE9C0034B6DC /* welcome.mp4 in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
@@ -610,6 +632,7 @@
 				0D7A5D541FC31AC500F4D73F /* catalog.json in Resources */,
 				0D29213D1FBEFE9C0034B6DC /* welcome.mp4 in Resources */,
 				0D5B45911FC1CF7700B28937 /* play.png in Resources */,
+				EC7A47DE1FD0121B00228EC2 /* playclips.catalog in Resources */,
 				503AE0F817EB97AB00D1A890 /* Icon.icns in Resources */,
 				0D9CE94B1FBC346E0047E63D /* playclips_400.png in Resources */,
 				3EACC99019EE6D4300EB3C5E /* res in Resources */,
@@ -652,6 +675,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7A47DF1FD012FE00228EC2 /* ADJAdjust2dx.mm in Sources */,
+				EC7A47E01FD012FF00228EC2 /* ADJConfig2dx.mm in Sources */,
+				EC7A47E11FD012FF00228EC2 /* ADJDelegate2dx.mm in Sources */,
+				EC7A47E21FD012FF00228EC2 /* ADJEvent2dx.mm in Sources */,
+				EC7A47E31FD012FF00228EC2 /* Adjust2dx.cpp in Sources */,
+				EC7A47E41FD012FF00228EC2 /* AdjustAttribution2dx.cpp in Sources */,
+				EC7A47E51FD012FF00228EC2 /* AdjustConfig2dx.cpp in Sources */,
+				EC7A47E61FD012FF00228EC2 /* AdjustEvent2dx.cpp in Sources */,
+				EC7A47E71FD012FF00228EC2 /* AdjustEventFailure2dx.cpp in Sources */,
+				EC7A47E81FD012FF00228EC2 /* AdjustEventSuccess2dx.cpp in Sources */,
+				EC7A47E91FD012FF00228EC2 /* AdjustProxy2dx.cpp in Sources */,
+				EC7A47EA1FD012FF00228EC2 /* AdjustSessionFailure2dx.cpp in Sources */,
+				EC7A47EB1FD012FF00228EC2 /* AdjustSessionSuccess2dx.cpp in Sources */,
 				0D6B61741FC5C7D10053A7C7 /* PlayClipsSampleScene.cpp in Sources */,
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				0D6B61721FC5916D0053A7C7 /* PlayClipsModels.cpp in Sources */,
