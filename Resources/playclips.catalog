@@ -1,12 +1,12 @@
 {
-    "packageUrl": "https://developer.playclips.com/",
-    "remoteManifestUrl": "https://developer.playclips.com/{influencer}.manifest",
-    "remoteVersionUrl": "https://developer.playclips.com/{influencer}.version",
+    "packageUrl": "http://cdn-stg.svplayclips.com",
+    "remoteManifestUrl": "http://cdn-stg.svplayclips.com/{influencer}.manifest",
+    "remoteVersionUrl": "http://cdn-stg.svplayclips.com/{influencer}.version",
     "version": "0.0.0",
     "engineVersion": "3.1.16",
     "assets": {
         "catalog.zip": {
-            "md5": "c1d1b38e7d4f3dcd165aff0cb2d27844",
+            "md5": "000000000",
             "compressed": true
         }
     },
