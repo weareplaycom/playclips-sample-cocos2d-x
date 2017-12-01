@@ -414,15 +414,15 @@ void PlayClipsSample::influencerSelected() {
         item->setFontNameObj("Arial");
         item->setFontSizeObj(14);
         item->setAnchorPoint(Vec2(0, 1));
-        item->setPosition(Vec2(origin.x+10, origin.y - 30*idx-10));
+        item->setPosition(Vec2(origin.x, origin.y - 30*idx-10));
         return item;
     });
 
     auto menu = Menu::createWithArray(tagsMenu);
     menu->setAnchorPoint(Vec2(0, 1));
-    menu->setPosition(Vec2(origin.x + 100, sprite->getPosition().y - 50 - sprite->getContentSize().height));
+    menu->setPosition(Vec2(origin.x + 10, sprite->getPosition().y - sprite->getContentSize().height - 10));
     
-    this->addChild(menu, 10);
+    this->addChild(menu, 1);
     
 }
 
