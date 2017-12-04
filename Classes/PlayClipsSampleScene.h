@@ -18,18 +18,16 @@ public:
 
     static Scene* createScene();
 
+    void menuCloseCallback(cocos2d::Ref* pSender);
+
+    // Download the influencer asset catalog using Asset Manager Ex
     void downloadZipCatalog(std::string influencer);
 
+    // static method to handle the deferred deeplink information obtained
+    // from Adjust
     static bool deferredDeeplinkCallbackMethod(std::string deeplink);
 
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
-    void influencerSelected();
-
-    void loadCatalog(cocos2d::Ref* pSender);
     void playVideo(cocos2d::Ref* pSender, std::string tag);
-    
-    void loadJsonCatalog(const char* json, std::string influencer_id);
     
     // implement the "static create()" method manually
     CREATE_FUNC(PlayClipsSample);
@@ -37,6 +35,9 @@ public:
     void update(float) override;
     
 private:
+    void influencerSelected();
+    void loadInfluencerMetadata(cocos2d::Ref* pSender);
+
     cocos2d::Menu* menuStart;
     cocos2d::Sprite* sprite;
     rapidjson::Document jsonCatalog;

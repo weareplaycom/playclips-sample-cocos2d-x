@@ -25,12 +25,25 @@ using namespace network;
 
 PlayClipsSample* privateInstance;
 
-Scene* PlayClipsSample::createScene()
-{
-    // We need this privateInstance for the deferredDeeplinkCallbackMethod
-    // as we cannot use std::function and std::bind
-    privateInstance = PlayClipsSample::create();
-    return privateInstance;
+// Helper to iterate through a container (C) elements,
+// call a predicate (P) and keep the results in
+// another container (R)
+template<typename R, typename C, typename P>
+void mapWithIndex(R& r, const C& c, P pred) {
+    int idx = 0;
+    for (auto& elem : c) {
+        r.pushBack(pred(elem, idx));
+        idx++;
+    }
+}
+
+// Helper to iterate through a container (C) elements,
+// call a predicate (P)
+template<typename C, typename P>
+void forEach(const C& c, P pred) {
+    for (auto& elem : c) {
+        pred(elem);
+    }
 }
 
 // Print useful error message instead of segfaulting when files are not there.
@@ -40,15 +53,27 @@ static void problemLoading(const char* filename)
     cocos2d::log("Depending on how you compiled you might have to add 'Resources/' in front of filenames in PlayClipsSampleScene.cpp");
 }
 
+Scene* PlayClipsSample::createScene()
+{
+    // We need this privateInstance for the deferredDeeplinkCallbackMethod
+    // as we cannot use std::function and std::bind
+    privateInstance = PlayClipsSample::create();
+    return privateInstance;
+}
+
+// Obtain the influencer identifier from user preferences, previously
+// stored via the deferred deeplink flow
 static std::string loadInfluencerId() {
     return UserDefault::getInstance()->getStringForKey("playclips.influencer");
 }
 
+// Save the influencer identifier in user preferences
 static void saveInfluencerId(std::string influencer_id) {
     UserDefault::getInstance()->setStringForKey("playclips.influencer", influencer_id);
 }
 
-// static method
+// Static method to obtain the deferred deeplink information from
+// Adjust and extract the influencer
 bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
     cocos2d::log("\nDeferred deep link received!");
 
@@ -59,6 +84,7 @@ bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
     // Notify Adjust
     Adjust2dx::appWillOpenUrl(deeplink);
 
+    // Parse deeplink information
     DeferredDeeplink playClipsDeeplink(deeplink);
 
     auto component = (MenuItemFont*)privateInstance->menuStart->getChildByName("waiting");
@@ -68,7 +94,11 @@ bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
         cocos2d::log("Influencer is: %s", playClipsDeeplink.getInfluencer().c_str());
 
         saveInfluencerId(playClipsDeeplink.getInfluencer());
-        component->setString("The influencer \nassigned to you is:\n\n" + playClipsDeeplink.getInfluencer() + "\n\nClick to start!");
+        component->setString("The influencer \nassigned to you is:\n\n" +
+                             playClipsDeeplink.getInfluencer() +
+                             "\n\nClick to start!");
+
+        // Launch the influencer catalog download
         privateInstance->downloadZipCatalog(playClipsDeeplink.getInfluencer());
         return true;
     } else {
@@ -121,7 +151,7 @@ bool PlayClipsSample::init()
     
     // Start menu item
     auto influencerItem = MenuItemFont::create("Waiting for influencer...",
-                                            CC_CALLBACK_1(PlayClipsSample::loadCatalog, this));
+                                            CC_CALLBACK_1(PlayClipsSample::loadInfluencerMetadata, this));
     
     influencerItem->setAnchorPoint(Vec2(0.5,0.5));
     influencerItem->setFontNameObj("Arial");
@@ -192,39 +222,48 @@ bool PlayClipsSample::init()
     return true;
 }
 
+// Create the influencer catalog file that will be used by AssetManagerEx
+// to download the catalog
 std::string generateInfluencerFile(std::string influencer) {
     FileUtils *fileUtils = FileUtils::getInstance();
     std::string path = FileUtils::getInstance()->getWritablePath() + influencer + ".catalog";
-    
+
+    // Update the default playclips.catalog file with the influencer identifier obtained
+    // via deferred deeplink
     if (fileUtils->isFileExist("playclips.catalog")) {
-        rapidjson::Document jsonCatalog;
+        const std::string placeholder = "{influencer}";
+
+        rapidjson::Document jsonCatalogData;
         std::string data = fileUtils->getStringFromFile("playclips.catalog");
-        jsonCatalog.Parse<kParseDefaultFlags>(data.c_str());
-        std::string placeholder = "{influencer}";
-        
-        rapidjson::Value& manifestUrl = jsonCatalog["remoteManifestUrl"];
+        jsonCatalogData.Parse<kParseDefaultFlags>(data.c_str());
+
+        // Update the remote manifest URL
+        rapidjson::Value& manifestUrl = jsonCatalogData["remoteManifestUrl"];
         std::string manifestValue = manifestUrl.GetString();
         manifestValue = manifestValue.replace(manifestValue.find(placeholder), placeholder.length(), influencer);
         manifestUrl.SetString(manifestValue.c_str(), manifestValue.length());
-        
-        rapidjson::Value& versionUrl = jsonCatalog["remoteVersionUrl"];
+
+        // Update the remote version URL
+        rapidjson::Value& versionUrl = jsonCatalogData["remoteVersionUrl"];
         std::string versionValue = versionUrl.GetString();
         versionValue = versionValue.replace(versionValue.find(placeholder), placeholder.length(), influencer);
         versionUrl.SetString(versionValue.c_str(), versionValue.length());
+
         StringBuffer buffer;
         Writer<StringBuffer> writer(buffer);
-        jsonCatalog.Accept(writer);
+        jsonCatalogData.Accept(writer);
 
         FILE *fp = fopen(path.c_str(), "w");
-        if (! fp) {
-            CCLOG("can not create file %s", path.c_str());
+        if (!fp) {
+            cocos2d::log("can not create file %s", path.c_str());
         } else {
+            // Store the JSON content in the new file
             fputs(buffer.GetString(), fp);
             fclose(fp);
-            CCLOG("File created: %s", path.c_str());
+            cocos2d::log("File created: %s", path.c_str());
         }
     } else {
-        CCLOG("no luck");
+        cocos2d::log("Missing playclips.catalog template file");
     }
     return path;
 }
@@ -232,10 +271,14 @@ std::string generateInfluencerFile(std::string influencer) {
 void PlayClipsSample::downloadZipCatalog(std::string influencer)
 {
     // TODO: handle errors while creating the file
+
+    // Create a file compatible with AssetManagerEx format
+    // http://www.cocos2d-x.org/wiki/Assets_Manager_Extension
     std::string influencerCatalog = generateInfluencerFile(influencer);
-    std::string storagePath = FileUtils::getInstance()->getWritablePath() + "playclips";
+    std::string storagePath = FileUtils::getInstance()->getWritablePath() + "playclips/" + influencer;
     cocos2d::log("Storage path for the catalog: %s", storagePath.c_str());
-    
+
+    // Launch the influencer asset catalog download
     AssetsManagerEx* _am = AssetsManagerEx::create(influencerCatalog, storagePath);
     
     _am->retain();
@@ -300,13 +343,6 @@ void PlayClipsSample::downloadZipCatalog(std::string influencer)
 
  
 void PlayClipsSample::update(float delta) {
-    // delta: amount of time, in seconds since the last time the update function was called
-//    auto position = sprite->getPosition();
-//    auto new_position = position.x - 100 * delta;
-//    position.x = new_position >= 0 - sprite->getBoundingBox().size.width / 2
-//               ? new_position
-//               : this->getBoundingBox().getMaxX() + sprite->getBoundingBox().size.width/2;
-//    sprite->setPosition(position);
 }
 
 
@@ -323,72 +359,6 @@ void PlayClipsSample::menuCloseCallback(Ref* pSender)
 
     //EventCustom customEndEvent("game_scene_close_event");
     //_eventDispatcher->dispatchEvent(&customEndEvent);
-}
-
-void PlayClipsSample::loadJsonCatalog(const char* data, std::string influencer_id) {
-    jsonCatalog.Parse<kParseDefaultFlags>(data);
-    
-    Influencer* inf = new Influencer(influencer_id,
-                                     jsonCatalog["name"].GetString(),
-                                     jsonCatalog["thumbnail"].GetString());
-    
-    for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog["videos"].MemberBegin();
-         itr != jsonCatalog["videos"].MemberEnd();
-         ++itr) {
-        
-        Video* video = new Video(itr->name.GetString(),
-                                 itr->value["location"].GetString(),
-                                 itr->value["weight"].GetInt());
-
-        auto tags = itr->value["tags"].GetArray();
-        
-        for (auto& tag:tags) {
-            cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
-                         tag.GetString(),
-                         video->getId().c_str(),
-                         inf->getId().c_str());
-            video->addTag(tag.GetString());
-        }
-        inf->addVideo(video);
-    }
-    this->influencer = inf;
-}
-
-template<typename R, typename C, typename P>
-void mapWithIndex(R& r, const C& c, P pred) {
-    int idx = 0;
-    for (auto& elem : c) {
-        r.pushBack(pred(elem, idx));
-        idx++;
-    }
-}
-
-template<typename C, typename P>
-void forEachWithIndex(const C& c, P pred) {
-    int idx = 0;
-    for (auto& elem : c) {
-        pred(elem, idx);
-    }
-}
-
-template<typename C, typename P>
-void forEach(const C& c, P pred) {
-    for (auto& elem : c) {
-        pred(elem);
-    }
-}
-
-template <typename C>
-using Value_type = typename C::value_type;
-
-template <typename C, typename P>
-Value_type<C> findFirst(const C& c, P pred) {
-    for (auto& inf: c) {
-        if (pred(*inf)) {
-            return inf;
-        }
-    }
-    return nullptr;
 }
 
 void PlayClipsSample::influencerSelected() {
@@ -430,11 +400,7 @@ void PlayClipsSample::playVideo(Ref* pSender, std::string tag) {
 
     Video* video = this->influencer->getVideoByTag(tag);
     std::string str = video->getLocation();
-    std::string quality_placeholder = "{quality}";
-
-    // TODO: user to be able to select the quality, either high, medium or low
-    str = str.replace(str.find(quality_placeholder), quality_placeholder.length(), "high");
-    str = FileUtils::getInstance()->getWritablePath()  + "playclips/" + str;
+    str = FileUtils::getInstance()->getWritablePath()  + "playclips/" + this->influencer->getId() + "/" + str;
 
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     cocos2d::log("Play Video %s", str.c_str());
@@ -479,17 +445,43 @@ void PlayClipsSample::playVideo(Ref* pSender, std::string tag) {
     
 }
 
-void PlayClipsSample::loadCatalog(Ref* pSender)
+void PlayClipsSample::loadInfluencerMetadata(Ref* pSender)
 {
     menuStart->setVisible(false);
     std::string influencer_id = loadInfluencerId();
-    cocos2d::log("Loading data from disk for influencer: %s", influencer_id.c_str());
+    cocos2d::log("Loading metadadata from disk for influencer: %s", influencer_id.c_str());
     std::string influencerCatalogFile = FileUtils::getInstance()->getWritablePath()  +
-                                        "playclips/" +
-                                        influencer_id+
-                                        ".catalog";
+                                        "playclips/" + influencer_id + "/metadata.json";
     
+    // Load and parse metadata.json content
     const char * data = FileUtils::getInstance()->getStringFromFile(influencerCatalogFile).c_str();
-    this->loadJsonCatalog(data, influencer_id);
+    jsonCatalog.Parse<kParseDefaultFlags>(data);
+
+    Influencer* inf = new Influencer(influencer_id,
+                                     jsonCatalog["name"].GetString(),
+                                     jsonCatalog["thumbnail"].GetString());
+
+    // Load video info (local relative location, tags)
+    for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog["videos"].MemberBegin();
+         itr != jsonCatalog["videos"].MemberEnd();
+         ++itr) {
+
+        Video* video = new Video(itr->name.GetString(),
+                                 itr->value["location"].GetString(),
+                                 itr->value["weight"].GetInt());
+
+        auto tags = itr->value["tags"].GetArray();
+
+        for (auto& tag:tags) {
+            cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
+                         tag.GetString(),
+                         video->getId().c_str(),
+                         inf->getId().c_str());
+            video->addTag(tag.GetString());
+        }
+        inf->addVideo(video);
+    }
+    this->influencer = inf;
+
     this->influencerSelected();
 }
