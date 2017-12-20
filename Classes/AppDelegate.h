@@ -16,6 +16,12 @@ public:
     virtual void initGLContextAttrs();
 
     /**
+     @brief  Called when the user clicks a deeplink associated to the application
+     @param  clicked url
+     */
+    virtual bool openURL(const std::string &url) override;
+
+    /**
     @brief    Implement Director and Scene init code here.
     @return true    Initialize success, app continue.
     @return false   Initialize failed, app terminate.

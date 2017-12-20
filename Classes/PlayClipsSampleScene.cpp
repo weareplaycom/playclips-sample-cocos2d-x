@@ -96,7 +96,7 @@ bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
         saveInfluencerId(playClipsDeeplink.getInfluencer());
         component->setString("The influencer \nassigned to you is:\n\n" +
                              playClipsDeeplink.getInfluencer() +
-                             "\n\nClick to start!");
+                             "\n\nDownloading catalog...");
 
         // Launch the influencer catalog download
         privateInstance->downloadZipCatalog(playClipsDeeplink.getInfluencer());
@@ -286,7 +286,7 @@ void PlayClipsSample::downloadZipCatalog(std::string influencer)
     if (!_am->getLocalManifest()->isLoaded()) {
         cocos2d::log("Fail to update assets, step skipped.");
     } else {
-        EventListenerAssetsManagerEx* _amListener = EventListenerAssetsManagerEx::create(_am, [&_am, this](EventAssetsManagerEx* event) {
+        EventListenerAssetsManagerEx* _amListener = EventListenerAssetsManagerEx::create(_am, [&_am, influencer, this](EventAssetsManagerEx* event) {
             static int failCount = 0;
             
             switch (event->getEventCode()) {
@@ -314,6 +314,11 @@ void PlayClipsSample::downloadZipCatalog(std::string influencer)
                 case EventAssetsManagerEx::EventCode::ALREADY_UP_TO_DATE:
                 case EventAssetsManagerEx::EventCode::UPDATE_FINISHED: {
                     cocos2d::log("Update finished. %s", event->getMessage().c_str());
+                    auto component = (MenuItemFont*)privateInstance->menuStart->getChildByName("waiting");
+
+                    component->setString("The influencer \nassigned to you is:\n\n" +
+                                         influencer +
+                                         "\n\nDownloaded complete! \nClick to start");
                     break;
                 }
                 case EventAssetsManagerEx::EventCode::UPDATE_FAILED:
@@ -450,38 +455,47 @@ void PlayClipsSample::loadInfluencerMetadata(Ref* pSender)
     menuStart->setVisible(false);
     std::string influencer_id = loadInfluencerId();
     cocos2d::log("Loading metadadata from disk for influencer: %s", influencer_id.c_str());
+
     std::string influencerCatalogFile = FileUtils::getInstance()->getWritablePath()  +
                                         "playclips/" + influencer_id + "/metadata.json";
-    
-    // Load and parse metadata.json content
-    const char * data = FileUtils::getInstance()->getStringFromFile(influencerCatalogFile).c_str();
-    jsonCatalog.Parse<kParseDefaultFlags>(data);
 
-    Influencer* inf = new Influencer(influencer_id,
-                                     jsonCatalog["name"].GetString(),
-                                     jsonCatalog["thumbnail"].GetString());
+    if (FileUtils::getInstance()->isFileExist(influencerCatalogFile)) {
+        cocos2d::log("Influencer metadata file exists");
 
-    // Load video info (local relative location, tags)
-    for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog["videos"].MemberBegin();
-         itr != jsonCatalog["videos"].MemberEnd();
-         ++itr) {
+        // Load and parse metadata.json content
+        const char * data = FileUtils::getInstance()->getStringFromFile(influencerCatalogFile).c_str();
+        jsonCatalog.Parse<kParseDefaultFlags>(data);
 
-        Video* video = new Video(itr->name.GetString(),
-                                 itr->value["location"].GetString(),
-                                 itr->value["weight"].GetInt());
+        Influencer* inf = new Influencer(influencer_id,
+                                         jsonCatalog["name"].GetString(),
+                                         jsonCatalog["thumbnail"].GetString());
 
-        auto tags = itr->value["tags"].GetArray();
+        // Load video info (local relative location, tags)
+        for (rapidjson::Value::ConstMemberIterator itr = jsonCatalog["videos"].MemberBegin();
+             itr != jsonCatalog["videos"].MemberEnd();
+             ++itr) {
 
-        for (auto& tag:tags) {
-            cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
-                         tag.GetString(),
-                         video->getId().c_str(),
-                         inf->getId().c_str());
-            video->addTag(tag.GetString());
+            Video* video = new Video(itr->name.GetString(),
+                                     itr->value["location"].GetString(),
+                                     itr->value["weight"].GetInt());
+
+            auto tags = itr->value["tags"].GetArray();
+
+            for (auto& tag:tags) {
+                cocos2d::log("Adding tag %s to the list of the video %s for the influencer %s",
+                             tag.GetString(),
+                             video->getId().c_str(),
+                             inf->getId().c_str());
+                video->addTag(tag.GetString());
+            }
+            inf->addVideo(video);
         }
-        inf->addVideo(video);
-    }
-    this->influencer = inf;
+        this->influencer = inf;
 
-    this->influencerSelected();
+        this->influencerSelected();
+    } else {
+        cocos2d::log("Error while loading the influencer metadata. File does not exist");
+        // Handle error
+    }
+
 }

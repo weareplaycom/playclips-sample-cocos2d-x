@@ -94,6 +94,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     adjustConfig.setLogLevel(PlayClipsSampleConfig::adjustLogLevel);
 
     adjustConfig.setDeferredDeeplinkCallback(PlayClipsSample::deferredDeeplinkCallbackMethod);
+    cocos2d::log("Starting Adjust SDK");
 
     Adjust2dx::start(adjustConfig);
 
@@ -103,12 +104,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
     return true;
 }
 
+// This function will be called from native code to continue an user web activity (deeplink)
+bool AppDelegate::openURL(const std::string &url) {
+    cocos2d::log("Open Url starts with url value: %s", url.c_str());
+    PlayClipsSample::deferredDeeplinkCallbackMethod(url);
+    return true;
+}
+
 // This function will be called when the app is inactive. Note, when receiving a phone call it is invoked.
 void AppDelegate::applicationDidEnterBackground() {
+    cocos2d::log("Background starts");
     Director::getInstance()->stopAnimation();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
+    cocos2d::log("Foreground starts");
     Director::getInstance()->startAnimation();
 }

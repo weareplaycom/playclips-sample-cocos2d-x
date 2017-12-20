@@ -82,6 +82,22 @@ static AppDelegate s_sharedApplication;
     return YES;
 }
 
+// This method is called by the OS when the user clicks on an Universal Link associated to the application
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
+ restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+    if ([[userActivity activityType] isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        NSURL *url = [userActivity webpageURL];
+        // Delegate URL handling to the upper layer (C++ code)
+        // url object contains your universal link content
+        cocos2d::Application::getInstance()->openURL(std::string([url.absoluteString UTF8String]));
+    }
+
+    // Apply your logic to determine the return value of this method
+    return YES;
+    // or
+    // return NO;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
