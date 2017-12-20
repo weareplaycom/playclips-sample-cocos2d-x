@@ -94,6 +94,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     adjustConfig.setLogLevel(PlayClipsSampleConfig::adjustLogLevel);
 
     adjustConfig.setDeferredDeeplinkCallback(PlayClipsSample::deferredDeeplinkCallbackMethod);
+    adjustConfig.setAttributionCallback(PlayClipsSample::attributionCallbackMethod);
+    adjustConfig.setEventSuccessCallback(PlayClipsSample::eventSuccessCallbackMethod);
+    adjustConfig.setEventFailureCallback(PlayClipsSample::eventFailureCallbackMethod);
+
     cocos2d::log("Starting Adjust SDK");
 
     Adjust2dx::start(adjustConfig);
@@ -107,6 +111,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
 // This function will be called from native code to continue an user web activity (deeplink)
 bool AppDelegate::openURL(const std::string &url) {
     cocos2d::log("Open Url starts with url value: %s", url.c_str());
+
+    // Notify adjust about the url tracking
+    Adjust2dx::appWillOpenUrl(url);
+
+    // Send In-App event
+    Adjust2dx::trackEvent(AdjustEvent2dx("biyo4b"));
+
     PlayClipsSample::deferredDeeplinkCallbackMethod(url);
     return true;
 }

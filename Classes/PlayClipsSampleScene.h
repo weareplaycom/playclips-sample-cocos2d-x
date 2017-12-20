@@ -1,10 +1,13 @@
 #pragma once
 
-#include "cocos2d.h"
 #include <list>
+
+#include "cocos2d.h"
 #include "network/HttpClient.h"
 #include "json/rapidjson.h"
 #include "json/document-wrapper.h"
+
+#include "Adjust/Adjust2dx.h"
 
 #include "PlayClipsModels.h"
 
@@ -26,6 +29,12 @@ public:
     // static method to handle the deferred deeplink information obtained
     // from Adjust
     static bool deferredDeeplinkCallbackMethod(std::string deeplink);
+
+    static void attributionCallbackMethod(AdjustAttribution2dx attribution);
+
+    static void eventSuccessCallbackMethod(AdjustEventSuccess2dx eventSuccess);
+
+    static void eventFailureCallbackMethod(AdjustEventFailure2dx eventFailure);
 
     void playVideo(cocos2d::Ref* pSender, std::string tag);
     

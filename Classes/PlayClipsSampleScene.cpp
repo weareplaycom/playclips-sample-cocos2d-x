@@ -72,6 +72,41 @@ static void saveInfluencerId(std::string influencer_id) {
     UserDefault::getInstance()->setStringForKey("playclips.influencer", influencer_id);
 }
 
+void PlayClipsSample::attributionCallbackMethod(AdjustAttribution2dx attribution) {
+    // Printing all attribution properties.
+    CCLOG("\nAttribution changed!");
+    CCLOG("\nTracker token: %s", attribution.getTrackerToken().c_str());
+    CCLOG("\nTracker name: %s", attribution.getTrackerName().c_str());
+    CCLOG("\nNetwork: %s", attribution.getNetwork().c_str());
+    CCLOG("\nCampaign: %s", attribution.getCampaign().c_str());
+    CCLOG("\nAdgroup: %s", attribution.getAdgroup().c_str());
+    CCLOG("\nCreative: %s", attribution.getCreative().c_str());
+    CCLOG("\nClick label: %s", attribution.getClickLabel().c_str());
+    CCLOG("\nAdid: %s", attribution.getAdid().c_str());
+    CCLOG("\n");
+}
+
+void PlayClipsSample::eventFailureCallbackMethod(AdjustEventFailure2dx eventFailure) {
+    CCLOG("\nEvent tracking failed!");
+    CCLOG("\nADID: %s", eventFailure.getAdid().c_str());
+    CCLOG("\nMessage: %s", eventFailure.getMessage().c_str());
+    CCLOG("\nTimestamp: %s", eventFailure.getTimestamp().c_str());
+    CCLOG("\nWill retry: %s", eventFailure.getWillRetry().c_str());
+    CCLOG("\nEvent token: %s", eventFailure.getEventToken().c_str());
+    CCLOG("\nJSON response: %s", eventFailure.getJsonResponse().c_str());
+    CCLOG("\n");
+}
+
+void PlayClipsSample::eventSuccessCallbackMethod(AdjustEventSuccess2dx eventSuccess) {
+    CCLOG("\nEvent successfully tracked!");
+    CCLOG("\nADID: %s", eventSuccess.getAdid().c_str());
+    CCLOG("\nMessage: %s", eventSuccess.getMessage().c_str());
+    CCLOG("\nTimestamp: %s", eventSuccess.getTimestamp().c_str());
+    CCLOG("\nEvent token: %s", eventSuccess.getEventToken().c_str());
+    CCLOG("\nJSON response: %s", eventSuccess.getJsonResponse().c_str());
+    CCLOG("\n");
+}
+
 // Static method to obtain the deferred deeplink information from
 // Adjust and extract the influencer
 bool PlayClipsSample::deferredDeeplinkCallbackMethod(std::string deeplink) {
@@ -442,6 +477,7 @@ void PlayClipsSample::playVideo(Ref* pSender, std::string tag) {
 
     this->addChild(videoPlayer, 10, 1);
     videoPlayer->play();
+    Adjust2dx::trackEvent(AdjustEvent2dx("cxb37g"));
 #else
     std::string unsupportedPlatform = "I was about to reproduce "+video->getId()+", but your platform does not support Video player";
     cocos2d::log("%s", unsupportedPlatform.c_str());
